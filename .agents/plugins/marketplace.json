@@ -1,0 +1,20 @@
+{
+  "name": "award-video-production",
+  "interface": {
+    "displayName": "颁奖视频制作"
+  },
+  "plugins": [
+    {
+      "name": "science-achievement-film",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Creative"
+    }
+  ]
+}

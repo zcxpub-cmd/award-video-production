@@ -1,0 +1,35 @@
+{
+  "name": "science-achievement-film",
+  "version": "1.0.0",
+  "description": "颁奖与成果展示视频制作：内置素材墙、文稿、剪辑字幕、技术检查、归档工具及外部软件操作方法。",
+  "author": {
+    "name": "Award Video Production contributors"
+  },
+  "skills": "./skills/",
+  "keywords": [
+    "颁奖视频制作",
+    "成果揭晓",
+    "科学传播",
+    "视频制作",
+    "旁白",
+    "素材墙",
+    "达芬奇"
+  ],
+  "interface": {
+    "displayName": "颁奖视频制作",
+    "shortDescription": "从资料和素材墙到剪辑、审核与归档的可复用制作工具。",
+    "longDescription": "面向颁奖、成果发布和科学传播的视频工作流。内置可播放审核素材墙、文稿导出、语义交接、字幕标题、基础剪辑混音、分章导出、技术检查和归档工具；附语音、生成、视频分析、几何、文档与达芬奇的独立操作配方。运行依赖按用户环境配置，不包含账号、模型或私有项目。",
+    "developerName": "Award Video Production contributors",
+    "category": "Creative",
+    "capabilities": [
+      "脚本与语义分镜",
+      "素材墙与生成规划",
+      "旁白与声音修订",
+      "后期与独立审核片",
+      "归档与交付核验"
+    ],
+    "defaultPrompt": "使用颁奖视频制作插件，依据当前资料和已确认版本，完成本次视频制作或修改，并同步脚本、素材、配音和审核记录。",
+    "brandColor": "#1B4965"
+  },
+  "license": "MIT"
+}

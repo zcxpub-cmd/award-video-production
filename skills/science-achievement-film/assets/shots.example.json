@@ -1,0 +1,20 @@
+{
+  "shots": [
+    {
+      "asset_id": "A01",
+      "chapter_id": "C01",
+      "source_path": "media/demo.mp4",
+      "sentence_ids": [
+        "C01_S01"
+      ],
+      "source_in_s": 0,
+      "source_out_s": 3,
+      "semantic_reason": "完整展示示例器件形态；实际项目需观看与事实核对",
+      "origin": "provided_video",
+      "local_codex_generated": false,
+      "text_policy": "保留必要的科学标签",
+      "review_status": "pending",
+      "review_note": ""
+    }
+  ]
+}

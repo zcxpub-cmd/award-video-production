@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "documented_on": "2026-11-01",
+  "distribution": "Original integration guides and helper code follow the repository license. External applications, model files, installers, proprietary materials, and noncommercial-license source text are not bundled.",
+  "provenance_policy": "Public upstream references and interface descriptions only. No machine inventory, private wrapper versions, private source hashes, account information or personal paths. Links are attribution/update references; executable methods are included locally.",
+  "sources": [
+    {
+      "id": "voicestudio",
+      "public_source": "https://github.com/debpalash/VoiceStudio",
+      "interface": "OpenAI-compatible /v1/audio/speech, /v1/audio/transcriptions, /v1/audio/voices; local MCP speech/transcription methods",
+      "license_note": "External application AGPL-3.0; models and voices may have independent terms. No upstream implementation redistributed.",
+      "method_scope": "Local service discovery, real profile IDs, file output, fixed voice settings, timed transcription and audio validation.",
+      "implementation_copied": false,
+      "reviewed_on": "2026-11-01",
+      "upstream_license": "AGPL-3.0",
+      "license_verification": "Public upstream repository license metadata checked; upstream implementation is not redistributed."
+    },
+    {
+      "id": "seedance-prompts",
+      "public_source": "https://github.com/Emily2040/seedance-2.0",
+      "interface": "Reference roles, continuity constraints and compact shot prompts",
+      "license_note": "Upstream MIT. No substantial upstream text, templates or implementation redistributed.",
+      "method_scope": "Independently written prompt workflow and continuity checks; generation still depends on authorized account capability.",
+      "implementation_copied": false,
+      "reviewed_on": "2026-11-01",
+      "upstream_license": "MIT",
+      "license_verification": "Public upstream repository license metadata checked; upstream implementation is not redistributed."
+    },
+    {
+      "id": "ark-http",
+      "public_source": "https://docs.volcengine.com/docs/ark/create-video-generation-task-api?lang=zh",
+      "interface": "POST contents/generations/tasks; GET contents/generations/tasks/{id}",
+      "license_note": "Public protocol reference; original minimal standard-library client under repository license.",
+      "method_scope": "Exact official Beijing API origin/path only; one submit per journal; query same endpoint; two exact documented provider download hosts; no redirects, custom proxies, auth on downloads, or automatic resubmission.",
+      "implementation_copied": false,
+      "reviewed_on": "2026-11-01",
+      "upstream_license": "not asserted; interface reference only",
+      "license_verification": "No upstream implementation or documentation text is redistributed; no external license is relicensed by this package.",
+      "additional_public_sources": [
+        "https://console.volcengine.com/ark/region%3Acn-beijing/docs/get-video-generation-task-api",
+        "https://docs.volcengine.com/docs/lake-ai-service/video-generation-enhanced-edition-basic-edition?lang=en"
+      ]
+    },
+    {
+      "id": "local-video",
+      "public_source": "https://github.com/HUANGCHIHHUNGLeo/claude-real-video",
+      "interface": "crv local-file CLI with grid, manifest, bounded frames, optional transcript",
+      "license_note": "Upstream CLI is MIT. No runtime, installer or upstream implementation redistributed.",
+      "method_scope": "Local authorized file evidence, timestamped frames, limited review windows and explicit limitations.",
+      "implementation_copied": false,
+      "reviewed_on": "2026-11-01",
+      "upstream_license": "MIT",
+      "license_verification": "Public upstream repository license metadata checked; upstream implementation is not redistributed."
+    },
+    {
+      "id": "freecad-mcp",
+      "public_source": "https://github.com/neka-nat/freecad-mcp",
+      "interface": "Typed document/object/view operations; scoped FreeCAD Python fallback",
+      "license_note": "Upstream MCP is MIT. No upstream source or addon redistributed; API usage guide independently written.",
+      "method_scope": "Loopback-only connection, explicit document scope, geometry readback, viewport check, new FCStd/STEP candidates.",
+      "implementation_copied": false,
+      "reviewed_on": "2026-11-01",
+      "upstream_license": "MIT",
+      "license_verification": "Public upstream repository license metadata checked; upstream implementation is not redistributed."
+    },
+    {
+      "id": "rhythm-methods",
+      "public_source": "https://github.com/dylantarre/animation-principles",
+      "interface": "Rhythm/pacing and sequence planning concepts",
+      "license_note": "Upstream skill repository is MIT. No upstream text or implementation redistributed; film-oriented rules independently written.",
+      "method_scope": "Beat mapping, action/rest timing and separation of UI timings from film durations.",
+      "implementation_copied": false,
+      "reviewed_on": "2026-11-01",
+      "upstream_license": "MIT",
+      "license_verification": "Public upstream repository license metadata checked; upstream implementation is not redistributed."
+    },
+    {
+      "id": "davinci-mcp-interface",
+      "public_source": null,
+      "interface": "Resolve MCP status, explicit project/media/timeline targets, guarded AI operations and single-job rendering",
+      "license_note": "Only interface signatures and independently written procedural instructions are included. No server, private wrapper, project or historical acceptance record redistributed.",
+      "method_scope": "Read the available tool schema at runtime; preserve its guards; verify persistence, output and perceptual quality separately.",
+      "implementation_copied": false,
+      "reviewed_on": "2026-11-01",
+      "upstream_license": "not asserted; interface reference only",
+      "license_verification": "No upstream implementation or documentation text is redistributed; no external license is relicensed by this package."
+    },
+    {
+      "id": "blender-cli",
+      "public_source": "https://docs.blender.org/manual/en/5.1/advanced/command_line/render.html",
+      "interface": "Blender background rendering and bpy scene inspection",
+      "license_note": "Original short inspection example; no upstream implementation bundled.",
+      "method_scope": "Geometry/camera invariants, evaluated state and representative rendered frames.",
+      "implementation_copied": false,
+      "reviewed_on": "2026-11-01",
+      "upstream_license": "not asserted; interface reference only",
+      "license_verification": "No upstream implementation or documentation text is redistributed; no external license is relicensed by this package."
+    },
+    {
+      "id": "tesseract-cli",
+      "public_source": "https://tesseract-ocr.github.io/tessdoc/Command-Line-Usage.html",
+      "interface": "tesseract input output -l languages --psm mode",
+      "license_note": "Public CLI reference; no OCR models or upstream implementation bundled.",
+      "method_scope": "Installed-language check, page-limited OCR and source-page verification of scientific notation.",
+      "implementation_copied": false,
+      "reviewed_on": "2026-11-01",
+      "upstream_license": "not asserted; interface reference only",
+      "license_verification": "No upstream implementation or documentation text is redistributed; no external license is relicensed by this package."
+    },
+    {
+      "id": "ffmpeg-cli",
+      "public_source": "https://ffmpeg.org/ffmpeg-filters.html",
+      "interface": "-filters, xfade, acrossfade and audiovisual QC filters",
+      "license_note": "External build retains its own license. No executable redistributed.",
+      "method_scope": "Capability-specific discovery and explicit normalization/transition parameters; no assumption that all builds include all filters.",
+      "implementation_copied": false,
+      "reviewed_on": "2026-11-01",
+      "upstream_license": "not asserted; interface reference only",
+      "license_verification": "No upstream implementation or documentation text is redistributed; no external license is relicensed by this package."
+    },
+    {
+      "id": "resolve-color-guide",
+      "public_source": "https://www.blackmagicdesign.com/products/davinciresolve/color",
+      "interface": "Official Resolve user-facing operation reference",
+      "license_note": "No official manual text, illustrations, implementation or proprietary application redistributed. Independently written task workflow only.",
+      "method_scope": "Primaries, scopes and serial node concepts; original GUI workflow and conservative scientific-image rules.",
+      "implementation_copied": false,
+      "reviewed_on": "2026-11-01",
+      "upstream_license": "not asserted; interface reference only",
+      "license_verification": "Reference for software behavior, not a license grant for external manuals or applications."
+    },
+    {
+      "id": "resolve-edit-guide",
+      "public_source": "https://www.blackmagicdesign.com/products/davinciresolve/edit",
+      "interface": "Official Resolve user-facing operation reference",
+      "license_note": "No official manual text, illustrations, implementation or proprietary application redistributed. Independently written task workflow only.",
+      "method_scope": "Inspector stabilization controls, layered titles and keyframe controls; no coordinates or unverified SDK method names.",
+      "implementation_copied": false,
+      "reviewed_on": "2026-11-01",
+      "upstream_license": "not asserted; interface reference only",
+      "license_verification": "Reference for software behavior, not a license grant for external manuals or applications."
+    },
+    {
+      "id": "resolve-editors-versioned-reference",
+      "public_source": "https://documents.blackmagicdesign.com/UserManuals/DaVinci-Resolve-17-Editors-Guide.pdf",
+      "interface": "Official Resolve user-facing operation reference",
+      "license_note": "No official manual text, illustrations, implementation or proprietary application redistributed. Independently written task workflow only.",
+      "method_scope": "Versioned official reference for stabilization mode semantics; runtime controls and ranges must be checked, not assumed.",
+      "implementation_copied": false,
+      "reviewed_on": "2026-11-01",
+      "upstream_license": "not asserted; interface reference only",
+      "license_verification": "Reference for software behavior, not a license grant for external manuals or applications."
+    }
+  ],
+  "version_policy": "No private installation or wrapper versions are published. Interface guides are not version-pinned runtime guarantees; inspect actual installed tool schemas for each task."
+}

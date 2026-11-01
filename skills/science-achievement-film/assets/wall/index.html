@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>颁奖视频 · 素材墙</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="masthead"><div class="brand"><span class="brand-mark">◈</span><span>颁奖视频制作 <small>素材工作台</small></span></div><span class="local-pill"><i></i> 本机审核 · 独立保存</span></header>
+    <main>
+      <section class="hero"><div><p class="eyebrow">MATERIAL REVIEW / 素材审核</p><h1 id="wall-title">颁奖视频素材墙</h1><p class="intro">把每一份素材，放到正确的叙事位置。查看来源、对照句子，留下明确的取舍。</p></div><div class="export-actions"><a href="/api/export?format=json" download>导出 JSON ↗</a><a href="/api/export?format=csv" download>导出 CSV ↗</a></div></section>
+      <div id="startup" class="notice" role="status">正在连接本机服务…</div>
+      <section class="stats" aria-label="审核概览"><div><strong id="total-count">0</strong><span>素材总数</span></div><div><strong id="approved-count">0</strong><span><i class="dot approved"></i>已通过</span></div><div><strong id="pending-count">0</strong><span><i class="dot pending"></i>待审</span></div><div><strong id="rejected-count">0</strong><span><i class="dot rejected"></i>已弃用</span></div><div class="progress-summary"><div><span>审核进度</span><b id="progress-label">0%</b></div><progress id="progress" max="100" value="0">0%</progress></div></section>
+      <section class="filters" aria-label="筛选素材"><label class="search-label"><span>搜索素材</span><input id="search" type="search" placeholder="搜索编号、文件名、句子或用途…"></label><label><span>章节</span><select id="chapter"><option value="">全部章节</option></select></label><label><span>来源</span><select id="origin"><option value="">全部来源</option></select></label><label><span>审核</span><select id="review"><option value="">全部状态</option><option value="pending">待审</option><option value="approved">通过</option><option value="rejected">弃用</option></select></label></section>
+      <div class="section-heading"><h2>素材列表 <span id="visible-count">0</span></h2><p>点击卡片查看媒体与审核详情</p></div>
+      <div id="wall" class="wall"></div>
+      <div id="empty" class="empty" hidden><span>◇</span><h2>没有匹配的素材</h2><p>试试其他关键词，或调整章节、来源与审核筛选。</p><button id="clear-filters" class="button secondary">清除筛选</button></div>
+    </main>
+    <footer>审核记录保存在此素材墙目录的 reviews.json · 原始素材保持不变<br>缩略图、可播放与审核通过，均不能代替科学核验、完整观看和最终用户验收。</footer>
+  </div>
+  <dialog id="detail" aria-labelledby="detail-title"><div class="dialog-head"><div><p class="eyebrow" id="detail-chapter"></p><h2 id="detail-title">素材详情</h2></div><button id="close-detail" class="icon-button" aria-label="关闭素材详情">×</button></div><div class="detail-grid"><section class="media-side"><div id="player" class="player"></div><div class="media-info" id="media-info"></div><div id="detail-issues" class="issues"></div><div class="detail-block"><h3>叙事用途</h3><p id="detail-purpose"></p><h3>对应句子</h3><div id="detail-sentences" class="chips"></div></div></section><section class="review-side"><div class="detail-block"><h3>素材信息</h3><dl id="detail-metadata"></dl></div><div class="review-box"><h3>审核决定</h3><label for="edit-status">当前状态</label><select id="edit-status"><option value="pending">待审 · 还需核实</option><option value="approved">通过 · 可进入制作</option><option value="rejected">弃用 · 不纳入制作</option></select><label for="edit-note">审核备注</label><textarea id="edit-note" rows="5" maxlength="10000" placeholder="记录选择理由、适用范围或待确认问题…"></textarea><div class="save-row"><span id="save-status" role="status">尚未修改</span><button id="save-review" class="button">保存审核</button></div><p class="small-note">保存后写入本地 JSON，重启服务后仍保留。导出包含最新已保存记录。</p></div></section></div></dialog>
+  <template id="card-template"><article class="card"><button class="open-card" type="button"><div class="card-media"><div class="placeholder"><span class="media-symbol">▷</span><span class="media-type">视频素材</span></div><div class="card-badges"></div><span class="open-label">查看与审核 ↗</span></div><div class="card-body"><div class="card-top"><h3 class="asset-name"></h3><span class="review-badge"></span></div><p class="file-name"></p><div class="card-context"><span class="chapter-name"></span><span class="origin-name"></span></div><p class="purpose"></p><div class="sentence-list chips"></div><p class="card-note"></p></div></button></article></template>
+  <noscript><p>请启用 JavaScript，或使用本机命令启动素材墙服务。</p></noscript>
+</body>
+</html>

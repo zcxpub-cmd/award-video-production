@@ -1,0 +1,111 @@
+# 颁奖视频制作
+
+可复用的 Codex skill / 插件，**公开首版 v1.0.0**。用于颁奖、成果发布和科学传播视频，从权威资料与文案、素材审核到剪辑、后期交接和交付归档。
+
+[逐项功能说明](docs/features.md) · [快速上手](skills/science-achievement-film/references/quickstart.md) · [能力与边界](skills/science-achievement-film/references/capabilities.md) · [验证范围](skills/science-achievement-film/references/verification.md)
+
+## 界面预览
+
+下图为真实运行的素材墙。六份媒体均为自产的虚构功能演示图形和程序动画，不是实际科研成果，也不代表生成模型效果。
+
+![素材墙总览：预览、来源、句子对应和审核进度](docs/screenshots/01-material-wall-overview.jpg)
+
+章节与审核状态可以组合筛选，快速找到当前待审素材：
+
+![素材墙组合筛选](docs/screenshots/02-material-wall-filter.jpg)
+
+打开素材后可实际播放，查看源内范围、分辨率和文字策略：
+
+![视频预览与审核详情](docs/screenshots/03-material-wall-review.jpg)
+
+审核决定与备注保存到本地，刷新后保留，并可导出JSON/CSV：
+
+![审核保存成功和句子对应](docs/screenshots/04-material-wall-saved.jpg)
+
+截图说明和验证过程见[截图索引](docs/screenshots/README.md)。
+
+## 包含什么
+
+- 可播放的本地素材墙：缩略图、兼容代理、章节/来源筛选、句子对应、审核备注、本地持久化、JSON/CSV导出。
+- 文档提取与文稿：DOCX/PPTX/PDF/文本导入、来源定位、四层文本、完整/逐章DOCX、语义交接。
+- 本地媒体生产：抽帧/接触表、重复与切点候选、SRT/ASS字幕和独立标题、等比剪辑、混音、保时静音、分项片和完整解码。
+- 项目检查与归档：时长/术语边界/冻结文件检查、依赖候选、独立复制、路径迁移、哈希核验、可恢复隔离与审定清理。
+- 内置外部工具方法：语音、Seedance、真实视频分析、摄影节奏、几何建模、PPT/WPS/OCR、达芬奇的输入、调用、操作、失败恢复和验证。
+
+本包内置制作逻辑和方法；Python、FFmpeg、OCR/语音工具、生成服务与原生编辑器是运行依赖。语义理解、科学核验、正常速度观看和听审由操作者/智能体实际完成，不能用文件存在或自动指标冒充。
+
+## 功能怎么用
+
+| 功能 | 典型输入 | 可得到的结果 |
+|---|---|---|
+| 项目策划与版本控制 | 最新需求、已确认组件、实际时长 | 制作计划、保护范围、可复核状态 |
+| 文档与旁白稿 | DOCX/PPTX/PDF、结构化文稿 | 来源定位、全篇/逐章DOCX、四层文本 |
+| 素材分析 | 本机视频与图片 | 参数、抽帧、接触表、切点和重复候选 |
+| 语义交接与素材墙 | 句子编号、镜头、用途、源内范围 | 可播放审核页、记录、JSON/CSV导出 |
+| 配音与生成集成 | 审定文本/提示词、已配置外部引擎 | 内置调用与恢复方法、任务账本、结果核对 |
+| 字幕标题与剪辑 | 实测时间码、显式剪辑配方 | SRT/ASS、完整片、独立成果片 |
+| 声音编排 | 旁白、BGM、明确时间与增益 | 混音、淡入淡出、压低音乐、保时静音 |
+| 达芬奇后期 | 时间线、源文件、原生软件 | 调色/稳像/包装/渲染的完整操作方法 |
+| 技术QC与归档 | 输出片、审定依赖 | 全解码报告、归档哈希、迁移与恢复工具 |
+| 环境与开源发布 | 本机配置、独立公开源 | 依赖诊断、隐私扫描、白名单ZIP |
+
+每项的**输入、命令、输出、依赖及验收边界**均在[详细功能说明](docs/features.md)中展开。通用工具完整公开，不附作者环境配置、私人媒体或账号。
+
+## 安装与调用
+
+### Codex 插件
+
+在支持本地插件市场的 Codex 中，于解压后的仓库根目录运行：
+
+```bash
+codex plugin marketplace add .
+codex plugin add science-achievement-film@award-video-production
+codex plugin list --marketplace award-video-production
+```
+
+插件显示名称为“颁奖视频制作”。新对话中选择它，或输入“使用颁奖视频制作插件，根据这些资料先做脚本和素材方案”。历史兼容标识 `science-achievement-film` 保持不变。
+
+### 仅安装 skill
+
+将 `skills/science-achievement-film` 整个目录复制到自己的 Codex skills 目录。调用 `$science-achievement-film`。所有模板、脚本、参考方法均使用技能内相对路径，不依赖原作者目录。
+
+## 快速开始
+
+在 `skills/science-achievement-film` 目录执行；新项目输出目录应选在仓库外：
+
+```bash
+python3 scripts/runtime_tools.py --help
+python3 scripts/filmkit.py init /path/to/new-project --chapters 3 --max-seconds 300 --fps 25
+python3 scripts/content_tools.py --help
+python3 scripts/material_wall.py --help
+python3 scripts/media_tools.py --help
+python3 scripts/archive_tools.py --help
+```
+
+完整可执行顺序和命令见 [QUICKSTART](skills/science-achievement-film/references/quickstart.md)，能力与验收边界见 [CAPABILITIES](skills/science-achievement-film/references/capabilities.md)。从 [SKILL.md](skills/science-achievement-film/SKILL.md) 按任务读取，不必一次加载所有参考。
+
+Python工具以标准库为基础。媒体命令需要相应能力的 FFmpeg/ffprobe；中文烧录字幕需要 libass 和中文字体。PDF/OCR/ASR及原生编辑器按对应集成方法配置。不会自动安装模型、启动付费生成或上传素材。
+
+## 一次跑通虚构演示
+
+```bash
+cd skills/science-achievement-film
+python3 scripts/demo_project.py --output /path/to/new-demo --ffmpeg /path/to/full/ffmpeg --font "Noto Sans CJK SC"
+```
+
+演示自己生成测试图形和正弦音（不是人物声音或真实成果），实际跑通文稿→素材墙→字幕标题→2.4秒短片/分项片→QC→归档。输出目录必须在仓库外；只在新目录输出，不联网、不调用生成模型，不自动判定科学或用户验收。完成后按输出的START_HERE.md启动素材墙。若PATH中FFmpeg已有所需过滤器可省略该参数。
+
+## 测试与发布
+
+```bash
+python3 -m unittest discover -s skills/science-achievement-film/tests -v
+python3 skills/science-achievement-film/tests/regression_filmkit.py
+python3 skills/science-achievement-film/scripts/public_release.py scan .
+python3 skills/science-achievement-film/scripts/public_release.py build . --out ../award-video-production-v1.0.0.zip
+```
+
+媒体回归需要支持相关过滤器的 FFmpeg；可通过 `MEDIA_TEST_FFMPEG` / `MEDIA_TEST_FFPROBE` 指定。测试使用临时合成素材，外部服务使用离线模拟；未运行付费模型或用户工程。发布工具只打包公开白名单，排除git历史、私有配置、制作输出和报告。隐私扫描是辅助，发布前仍应人工检查内容与许可证。
+
+[验证范围](skills/science-achievement-film/references/verification.md)记录实际运行与尚未执行部分。
+
+MIT，见 [LICENSE](LICENSE) 与 [NOTICE](NOTICE.md)。

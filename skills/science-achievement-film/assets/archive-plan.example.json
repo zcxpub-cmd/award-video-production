@@ -1,0 +1,25 @@
+{
+  "dependency_review_complete": false,
+  "files": [
+    {
+      "path": "delivery/film.mp4",
+      "role": "master"
+    },
+    {
+      "path": "delivery/C01.mp4",
+      "role": "chapter"
+    },
+    {
+      "path": "project/edit.json",
+      "role": "recipe"
+    },
+    {
+      "path": "media/demo.mp4",
+      "role": "source"
+    }
+  ],
+  "references": [
+    "project/edit.json"
+  ],
+  "unresolved": []
+}

@@ -1,0 +1,12 @@
+{
+  "verified_archives": [
+    "archive-final"
+  ],
+  "protect": [
+    "delivery",
+    "source-originals"
+  ],
+  "targets": [
+    "work-obsolete"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "tools": {
+    "ffmpeg": [
+      "ffmpeg"
+    ],
+    "ffprobe": [
+      "ffprobe"
+    ],
+    "blender": [
+      "blender"
+    ],
+    "freecad": [
+      "FreeCAD"
+    ],
+    "soffice": [
+      "soffice"
+    ],
+    "pdfinfo": [
+      "pdfinfo"
+    ],
+    "pdftotext": [
+      "pdftotext"
+    ],
+    "pdftoppm": [
+      "pdftoppm"
+    ],
+    "tesseract": [
+      "tesseract"
+    ],
+    "whisper": [
+      "whisper"
+    ],
+    "crv": [
+      "crv"
+    ]
+  },
+  "files": {
+    "davinci_client": "",
+    "voicestudio_app": "",
+    "wps_app": ""
+  },
+  "secret_files": {
+    "seedance_api_key": "",
+    "seedance_base_url": ""
+  },
+  "local_services": {
+    "voicestudio": "http://127.0.0.1:3900/health"
+  }
+}

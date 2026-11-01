@@ -1,0 +1,36 @@
+{
+  "project_title": "示例颁奖视频",
+  "opening": "从问题出发，寻找新的可能。",
+  "ending": "携手同行，继续探索。",
+  "chapters": [
+    {
+      "chapter_id": "C01",
+      "title": "示例成果：可调传感器",
+      "units": [
+        "示例机构甲",
+        "示例机构乙"
+      ],
+      "speak_title": true,
+      "speak_units": true,
+      "protected_terms": [
+        "可调传感器"
+      ],
+      "sentences": [
+        {
+          "id": "C01_S01",
+          "text": "这是一段虚构的成果介绍，仅用于演示工作流。",
+          "tts_text": "这是一段虚构的成果介绍，仅用于演示工作流。",
+          "subtitle_text": "这是一段虚构的成果介绍，仅用于演示工作流。",
+          "source_refs": [
+            {
+              "document_id": "DOC01",
+              "locator": "body-p-1"
+            }
+          ],
+          "facts_review_status": "pending"
+        }
+      ]
+    }
+  ],
+  "pronunciations": []
+}

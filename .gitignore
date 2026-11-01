@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.env.*
+!.env.example
+.venv/
+development/
+out/
+outputs/
+work/
+reports/
+*.log
+*.zip
+runtime-config.local.json
+reviews.json
+media-map.json

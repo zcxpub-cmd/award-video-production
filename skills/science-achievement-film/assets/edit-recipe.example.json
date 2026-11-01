@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "canvas": {"width": 1920, "height": 1080, "fps": 25, "background": "black"},
+  "clips": [
+    {"path": "media/live-action.mp4", "kind": "video", "in": 0, "out": 4, "audio": false, "fade_in": 0.2, "chapter_id": "C01"},
+    {"path": "media/diagram.png", "kind": "image", "duration": 3, "fade_out": 0.3, "chapter_id": "C02"}
+  ],
+  "subtitles": "subtitle-timing.json",
+  "audio": {
+    "keep_clip_audio": false,
+    "tracks": [
+      {"path": "media/music.wav", "in": 0, "duration": 7, "at": 0, "loop": true, "role": "bgm", "volume": 0.18, "fade_in": 0.2, "fade_out": 0.6, "duck": {"volume": 0.3, "intervals": [[0.6, 6.4]]}},
+      {"path": "media/narration-01.wav", "in": 0, "duration": 2.4, "at": 0.6, "role": "narration", "volume": 1},
+      {"path": "media/narration-02.wav", "in": 0, "duration": 2.8, "at": 3.6, "role": "narration", "volume": 1}
+    ],
+    "mute": []
+  },
+  "chapters": [{"id": "C01", "start": 0, "end": 4}, {"id": "C02", "start": 4, "end": 7}]
+}
