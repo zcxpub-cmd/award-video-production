@@ -25,6 +25,11 @@ class ReleaseTests(unittest.TestCase):
         with zipfile.ZipFile(output) as z:
             self.assertEqual(len(z.namelist()),4)
             self.assertFalse(any('.git/' in n or 'development/' in n or 'outputs/' in n or '.env' in n for n in z.namelist()))
+    def test_public_zip_cannot_include_itself_as_an_input(self):
+        output = self.root / 'docs' / 'release.zip'
+        with self.assertRaisesRegex(ValueError, 'outside the public source paths'):
+            P.build(self.root, output)
+        self.assertFalse(output.parent.exists())
     def test_private_text_is_rejected_without_echo(self):
         marker='private'+'person'
         (self.root/'README.md').write_text('/'+'Users/'+marker+'/workspace\n'+'api_key = "'+'Z'*24+'"')

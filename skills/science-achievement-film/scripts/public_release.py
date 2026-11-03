@@ -27,6 +27,8 @@ DENY_NAMES={'.env','.DS_Store','config.toml','auth.json','reviews.json','media-m
 PRIVATE_PARTS={'local','.local','private','.private','private-config','local-config'}
 PRIVATE_FILES={'local-runtime.md','local-manifest.json','runtime-config.json'}
 IMAGE_EXT={'.png','.jpg','.jpeg'}
+PUBLIC_PATHS = ('README.md', 'LICENSE', 'NOTICE.md', '.gitignore', 'edition.json',
+                '.codex-plugin', '.agents', 'skills', 'docs')
 
 
 def edition_status(root):
@@ -47,9 +49,9 @@ def is_screenshot(relative_path):
 
 
 def file_list(root):
-    roots=[root/'README.md',root/'LICENSE',root/'NOTICE.md',root/'.gitignore',root/'edition.json',root/'.codex-plugin',root/'.agents',root/'skills',root/'docs']
     files=[]
-    for selected in roots:
+    for relative in PUBLIC_PATHS:
+        selected = root / relative
         if selected.is_symlink():raise ValueError('Symlink is not allowed in a public release: '+str(selected.relative_to(root)))
         if not selected.exists():continue
         for p in ([selected] if selected.is_file() else sorted(selected.rglob('*'))):
@@ -97,6 +99,8 @@ def scan(root,deny_terms=()):
 def build(root,out,deny_terms=()):
     root=Path(root).resolve();out=Path(out)
     if out.exists():raise ValueError('Output exists; choose a new release version')
+    if any(out.resolve().is_relative_to(root / path) for path in PUBLIC_PATHS):
+        raise ValueError('Choose an output path outside the public source paths')
     edition=edition_status(root)
     if edition and (edition['edition']=='local' or not edition['publishable']):
         raise ValueError('Local or non-publishable edition cannot be packaged as a public release')

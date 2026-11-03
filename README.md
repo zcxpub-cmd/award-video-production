@@ -1,6 +1,6 @@
 # 颁奖视频制作
 
-可复用的 Codex skill / 插件，**公开首版 v1.0.0**。用于颁奖、成果发布和科学传播视频，从权威资料与文案、素材审核到剪辑、后期交接和交付归档。
+面向智能体的视频制作工具集，**当前版本 v1.1.0**。用于颁奖、成果发布和科学传播视频，从权威资料与文案、素材审核到剪辑、后期交接和交付归档。
 
 [逐项功能说明](docs/features.md) · [快速上手](skills/science-achievement-film/references/quickstart.md) · [能力与边界](skills/science-achievement-film/references/capabilities.md) · [验证范围](skills/science-achievement-film/references/verification.md)
 
@@ -53,6 +53,9 @@
 
 ## 安装与调用
 
+支持本地进程的智能体宿主可以使用 JSON 工具入口，见[智能体接入说明](docs/agent-integration.md)。
+相比 v1.0.0 的新增功能、配图与修复见 [v1.1.0 发布说明](docs/release-v1.1.0.md)。
+
 ### Codex 插件
 
 在支持本地插件市场的 Codex 中，于解压后的仓库根目录运行：
@@ -101,7 +104,7 @@ python3 scripts/demo_project.py --output /path/to/new-demo --ffmpeg /path/to/ful
 python3 -m unittest discover -s skills/science-achievement-film/tests -v
 python3 skills/science-achievement-film/tests/regression_filmkit.py
 python3 skills/science-achievement-film/scripts/public_release.py scan .
-python3 skills/science-achievement-film/scripts/public_release.py build . --out ../award-video-production-v1.0.0.zip
+python3 skills/science-achievement-film/scripts/public_release.py build . --out ../award-video-production-v1.1.0.zip
 ```
 
 媒体回归需要支持相关过滤器的 FFmpeg；可通过 `MEDIA_TEST_FFMPEG` / `MEDIA_TEST_FFPROBE` 指定。测试使用临时合成素材，外部服务使用离线模拟；未运行付费模型或用户工程。发布工具只打包公开白名单，排除git历史、私有配置、制作输出和报告。隐私扫描是辅助，发布前仍应人工检查内容与许可证。
