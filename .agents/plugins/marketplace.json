@@ -1,7 +1,7 @@
 {
   "name": "award-video-production",
   "interface": {
-    "displayName": "颁奖视频制作"
+    "displayName": "影序"
   },
   "plugins": [
     {

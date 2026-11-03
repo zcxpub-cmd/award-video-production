@@ -1,4 +1,4 @@
 interface:
-  display_name: "颁奖视频制作"
+  display_name: "影序"
   short_description: "从权威资料、旁白和素材墙到生成、后期、审核与安全归档"
   default_prompt: "使用 $science-achievement-film，根据我的资料和已确认内容制作或修订颁奖视频，并保留清晰的素材、配音、工程与审核记录。"

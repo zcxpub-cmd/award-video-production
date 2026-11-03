@@ -1,6 +1,10 @@
-# 颁奖视频制作
+# 影序
+
+**让故事，连接脉动。**
 
 面向智能体的视频制作工具集，**当前版本 v1.1.0**。用于颁奖、成果发布和科学传播视频，从权威资料与文案、素材审核到剪辑、后期交接和交付归档。
+
+影序原名「颁奖视频制作」。仓库地址和插件安装命令继续沿用原有标识。
 
 [逐项功能说明](docs/features.md) · [快速上手](skills/science-achievement-film/references/quickstart.md) · [能力与边界](skills/science-achievement-film/references/capabilities.md) · [验证范围](skills/science-achievement-film/references/verification.md)
 
@@ -66,7 +70,7 @@ codex plugin add science-achievement-film@award-video-production
 codex plugin list --marketplace award-video-production
 ```
 
-插件显示名称为“颁奖视频制作”。新对话中选择它，或输入“使用颁奖视频制作插件，根据这些资料先做脚本和素材方案”。历史兼容标识 `science-achievement-film` 保持不变。
+从主分支安装时，插件显示名称为「影序」。已有发行包可能仍显示「颁奖视频制作」。新对话中可以选择该插件，或输入「使用影序插件，根据这些资料先做脚本和素材方案」。调用标识为 `science-achievement-film`。
 
 ### 仅安装 skill
 
