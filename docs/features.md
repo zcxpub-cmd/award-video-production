@@ -1,6 +1,6 @@
 # 功能说明与操作示例
 
-本页对应公开版 **v1.0.0**。插件不是单一的视频生成按钮：它将可执行的本地工具、可审核的制作数据和外部引擎操作方法放在同一个包中。各模块可以独立使用，也可以按下述顺序连接。
+本页对应公开版 **v1.1.0**。各模块可以独立运行，也可以按下述顺序连接。通用智能体工具提供素材盘点、工程检查和媒体探测。[智能体接入](agent-integration.md) · [功能实拍](screenshots/README.md)
 
 所有命令默认在 `skills/science-achievement-film/` 目录执行。`/path/to/project` 是使用者自行选择的新项目目录，不是预置目录。输出一般要求新文件或新目录，以免覆盖已经确认的版本。模板中的文案、素材路径与测量值应替换为本项目真实内容。
 
@@ -78,25 +78,25 @@ python3 scripts/content_tools.py handoff /path/to/project/manuscript.json /path/
 
 用卡片查看缩略图、章节、来源、句子编号、用途与备注。顶部统计通过、待审、弃用和审核进度。只有清单明确指定 `local_codex_generated=true` 才显示“AI · 本机 Codex 生成”。示例中的标记仅演示本工作流主动制作的程序动画，不代表调用了某个生成模型。
 
-![素材墙总览：卡片、章节、来源、用途和进度](screenshots/01-material-wall-overview.jpg)
+![素材墙总览，展示卡片、章节、来源、用途和进度](screenshots/07-wall-overview.jpg)
 
 ### 5.2 组合筛选与搜索
 
-可按关键词、章节、来源、审核状态组合筛选。截图同时选择“结构与原理”和“待审”，将6份候选缩小到1份，方便逐项核对。
+可按关键词、章节、来源和审核状态组合筛选。截图将六份候选缩小到一份，方便逐项核对。
 
-![章节与待审状态的组合筛选](screenshots/02-material-wall-filter.jpg)
+![关键词、章节、来源和待审状态的组合筛选](screenshots/08-wall-filter.jpg)
 
 ### 5.3 媒体预览与原件保护
 
 打开卡片可预览图片、视频或音频，查看分辨率、源内建议范围、文字策略和授权记录。视频支持正常播放与定位。浏览器不支持的格式可在构建时明确开启代理转换；已有预览优先复用。代理保持完整时长和视场，原件不变。
 
-![视频预览与素材元数据](screenshots/03-material-wall-review.jpg)
+![视频预览与素材元数据](screenshots/09-wall-playback.jpg)
 
 ### 5.4 审核保存与交接导出
 
 选择“通过 / 待审 / 弃用”，填写理由并保存。页面明确显示“已保存到本地”后才算写入成功。审核结果保存在墙目录内的 `reviews.json`，刷新或重启服务后可继续使用。导出JSON/CSV包含最新已保存记录，可交给后续剪辑或继续审阅。
 
-![审核保存成功及对应句子](screenshots/04-material-wall-saved.jpg)
+![审核保存成功及对应句子](screenshots/10-wall-review-saved.jpg)
 
 ### 构建和启动
 

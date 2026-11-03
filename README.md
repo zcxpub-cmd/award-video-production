@@ -6,27 +6,71 @@
 
 影序原名「颁奖视频制作」。仓库地址和插件安装命令继续沿用原有标识。
 
-[逐项功能说明](docs/features.md) · [快速上手](skills/science-achievement-film/references/quickstart.md) · [能力与边界](skills/science-achievement-film/references/capabilities.md) · [验证范围](skills/science-achievement-film/references/verification.md)
+[开源版使用说明书](docs/使用说明书.md) · [逐项功能说明](docs/features.md) · [快速上手](skills/science-achievement-film/references/quickstart.md) · [能力与边界](skills/science-achievement-film/references/capabilities.md) · [验证范围](skills/science-achievement-film/references/verification.md)
 
-## 界面预览
+## 功能实拍
 
-下图为真实运行的素材墙。六份媒体均为自产的虚构功能演示图形和程序动画，不是实际科研成果，也不代表生成模型效果。
+以下是开源版 `v1.1.0` 用虚构工程运行得到的浏览器界面、命令输出和成片画面。[完整截图索引](docs/screenshots/README.md)
 
-![素材墙总览：预览、来源、句子对应和审核进度](docs/screenshots/01-material-wall-overview.jpg)
+### 素材墙与审核
 
-章节与审核状态可以组合筛选，快速找到当前待审素材：
+在一屏看素材来源、对应句子、用途和审核进度。打开卡片可播放视频并查看源内范围。
 
-![素材墙组合筛选](docs/screenshots/02-material-wall-filter.jpg)
+![素材墙总览，展示六份合成素材及审核统计](docs/screenshots/07-wall-overview.jpg)
 
-打开素材后可实际播放，查看源内范围、分辨率和文字策略：
+![播放视频候选，查看源内范围、分辨率和叙事用途](docs/screenshots/09-wall-playback.jpg)
 
-![视频预览与审核详情](docs/screenshots/03-material-wall-review.jpg)
+<details>
+<summary>查看组合筛选、审核保存和 JSON / CSV 导出</summary>
 
-审核决定与备注保存到本地，刷新后保留，并可导出JSON/CSV：
+![使用关键词、章节、来源和审核状态定位候选](docs/screenshots/08-wall-filter.jpg)
 
-![审核保存成功和句子对应](docs/screenshots/04-material-wall-saved.jpg)
+![修改审核结论和备注并保存](docs/screenshots/10-wall-review-saved.jpg)
 
-截图说明和验证过程见[截图索引](docs/screenshots/README.md)。
+![从同一次审核导出的 JSON 与 CSV 记录](docs/screenshots/11-wall-export.jpg)
+
+</details>
+
+### 智能体接入
+
+能启动本地进程的宿主可以发现工具，传入 JSON 参数，再读取素材盘点、工程检查和媒体参数。红框标出实际调用入口与返回字段。[智能体接入说明](docs/agent-integration.md)
+
+![红框标出工具发现命令、工具名称和参数结构](docs/screenshots/12-agent-discovery.jpg)
+
+<details>
+<summary>查看三个智能体工具的调用和返回</summary>
+
+![红框标出素材盘点的目录参数和报告](docs/screenshots/13-agent-inventory.jpg)
+
+![红框标出工程检查的输入和待补项](docs/screenshots/14-agent-check.jpg)
+
+![红框标出媒体探测的输入和视频流参数](docs/screenshots/15-agent-probe.jpg)
+
+</details>
+
+### 文稿、镜头交接和媒体分析
+
+文稿可导出可编辑 DOCX。将镜头与句子编号对应后，再用抽帧和候选检测辅助审核。
+
+![从导出的 DOCX 读取正文，并展示镜头和句子的对应记录](docs/screenshots/16-manuscript-handoff.jpg)
+
+![从实际视频生成的抽帧接触表与检测统计](docs/screenshots/17-media-frames.jpg)
+
+### 剪辑、字幕和交付
+
+按剪辑配方渲染带字幕的完整影片和分项片。成片可完整解码检查，归档可重新核验依赖的文件哈希。
+
+![实际成片画面、分项片与可编辑字幕](docs/screenshots/18-render-subtitles.jpg)
+
+![两条合成音轨混音，按区间压低音量和保时静音](docs/screenshots/21-audio-mix.jpg)
+
+![完整解码结果和归档哈希核验](docs/screenshots/19-qc-archive.jpg)
+
+### 视频生成配置
+
+用内置 Seedance 客户端离线校验模型和提示词组成的请求结构。用户配置 API、使用 ComfyUI 后导入和规划中的托管生成见手册。[生成配置说明](docs/使用说明书.md#3-三种新镜头生成方式)
+
+![Seedance 本地校验命令和实际返回值](docs/screenshots/20-seedance-validate.jpg)
 
 ## 包含什么
 
