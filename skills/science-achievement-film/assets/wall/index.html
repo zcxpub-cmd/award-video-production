@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <title>颁奖视频 · 素材墙</title>
+  <title>影序 · 素材墙</title>
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
 </head>
 <body>
   <div class="shell">
-    <header class="masthead"><div class="brand"><span class="brand-mark">◈</span><span>颁奖视频制作 <small>素材工作台</small></span></div><span class="local-pill"><i></i> 本机审核 · 独立保存</span></header>
+    <header class="masthead"><div class="brand"><span class="brand-mark">◈</span><span>影序 <small>素材工作台</small></span></div><span class="local-pill"><i></i> 本机审核 · 独立保存</span></header>
     <main>
-      <section class="hero"><div><p class="eyebrow">MATERIAL REVIEW / 素材审核</p><h1 id="wall-title">颁奖视频素材墙</h1><p class="intro">把每一份素材，放到正确的叙事位置。查看来源、对照句子，留下明确的取舍。</p></div><div class="export-actions"><a href="/api/export?format=json" download>导出 JSON ↗</a><a href="/api/export?format=csv" download>导出 CSV ↗</a></div></section>
+      <section class="hero"><div><p class="eyebrow">MATERIAL REVIEW / 素材审核</p><h1 id="wall-title">影序素材墙</h1><p class="intro">把每一份素材，放到正确的叙事位置。查看来源、对照句子，留下明确的取舍。</p></div><div class="export-actions"><a href="/api/export?format=json" download>导出 JSON ↗</a><a href="/api/export?format=csv" download>导出 CSV ↗</a></div></section>
       <div id="startup" class="notice" role="status">正在连接本机服务…</div>
       <section class="stats" aria-label="审核概览"><div><strong id="total-count">0</strong><span>素材总数</span></div><div><strong id="approved-count">0</strong><span><i class="dot approved"></i>已通过</span></div><div><strong id="pending-count">0</strong><span><i class="dot pending"></i>待审</span></div><div><strong id="rejected-count">0</strong><span><i class="dot rejected"></i>已弃用</span></div><div class="progress-summary"><div><span>审核进度</span><b id="progress-label">0%</b></div><progress id="progress" max="100" value="0">0%</progress></div></section>
       <section class="filters" aria-label="筛选素材"><label class="search-label"><span>搜索素材</span><input id="search" type="search" placeholder="搜索编号、文件名、句子或用途…"></label><label><span>章节</span><select id="chapter"><option value="">全部章节</option></select></label><label><span>来源</span><select id="origin"><option value="">全部来源</option></select></label><label><span>审核</span><select id="review"><option value="">全部状态</option><option value="pending">待审</option><option value="approved">通过</option><option value="rejected">弃用</option></select></label></section>

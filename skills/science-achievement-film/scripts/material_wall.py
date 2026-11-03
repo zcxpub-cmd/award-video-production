@@ -248,7 +248,7 @@ def build(args):
                 row["proxy_audio"] = proxy_audio
             records.append(row)
             assets.append(public)
-        manifest = {"version": VERSION, "title": str(data.get("title") or "颁奖视频素材墙"), "created_at": stamp(), "portable": bool(args.copy_media), "warnings": warnings, "assets": assets}
+        manifest = {"version": VERSION, "title": str(data.get("title") or "影序素材墙"), "created_at": stamp(), "portable": bool(args.copy_media), "warnings": warnings, "assets": assets}
         write_json(temporary / "manifest.json", manifest)
         write_json(temporary / "records.json", {"title": manifest["title"], "csv_fields": list(dict.fromkeys([*csv_fields, *CSV_FIELDS, "thumbnail_path", "preview_status", "preview_preserves_timeline", "proxy_audio"])), "assets": records})
         write_json(temporary / "media-map.json", media_map)
@@ -550,7 +550,7 @@ def serve(args):
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="颁奖视频素材墙：本地构建、播放、筛选、审核与导出。Python 标准库，无网络依赖。")
+    parser = argparse.ArgumentParser(description="影序素材墙：本地构建、播放、筛选、审核与导出。Python 标准库，无网络依赖。")
     parser.add_argument("--version", action="version", version=VERSION)
     commands = parser.add_subparsers(dest="command", required=True)
     builder = commands.add_parser("build", help="从 JSON / CSV 生成新素材墙目录，不覆盖输入和已有墙")
