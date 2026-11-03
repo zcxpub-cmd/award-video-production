@@ -78,25 +78,25 @@ python3 scripts/content_tools.py handoff /path/to/project/manuscript.json /path/
 
 用卡片查看缩略图、章节、来源、句子编号、用途与备注。顶部统计通过、待审、弃用和审核进度。只有清单明确指定 `local_codex_generated=true` 才显示“AI · 本机 Codex 生成”。示例中的标记仅演示本工作流主动制作的程序动画，不代表调用了某个生成模型。
 
-![素材墙总览，展示卡片、章节、来源、用途和进度](screenshots/07-wall-overview.jpg)
+![素材墙总览，展示卡片、章节、来源、用途和进度](screenshots/07-wall-overview-dark.jpg)
 
 ### 5.2 组合筛选与搜索
 
 可按关键词、章节、来源和审核状态组合筛选。截图将六份候选缩小到一份，方便逐项核对。
 
-![关键词、章节、来源和待审状态的组合筛选](screenshots/08-wall-filter.jpg)
+![关键词、章节、来源和待审状态的组合筛选](screenshots/08-wall-filter-dark.jpg)
 
 ### 5.3 媒体预览与原件保护
 
 打开卡片可预览图片、视频或音频，查看分辨率、源内建议范围、文字策略和授权记录。视频支持正常播放与定位。浏览器不支持的格式可在构建时明确开启代理转换；已有预览优先复用。代理保持完整时长和视场，原件不变。
 
-![视频预览与素材元数据](screenshots/09-wall-playback.jpg)
+![视频预览与素材元数据](screenshots/09-wall-playback-dark.jpg)
 
 ### 5.4 审核保存与交接导出
 
 选择“通过 / 待审 / 弃用”，填写理由并保存。页面明确显示“已保存到本地”后才算写入成功。审核结果保存在墙目录内的 `reviews.json`，刷新或重启服务后可继续使用。导出JSON/CSV包含最新已保存记录，可交给后续剪辑或继续审阅。
 
-![审核保存成功及对应句子](screenshots/10-wall-review-saved.jpg)
+![审核保存成功及对应句子](screenshots/10-wall-review-saved-dark.jpg)
 
 ### 构建和启动
 

@@ -16,16 +16,16 @@
 
 在一屏看素材来源、对应句子、用途和审核进度。打开卡片可播放视频并查看源内范围。
 
-![素材墙总览，展示六份合成素材及审核统计](docs/screenshots/07-wall-overview.jpg)
+![素材墙总览，展示六份合成素材及审核统计](docs/screenshots/07-wall-overview-dark.jpg)
 
-![播放视频候选，查看源内范围、分辨率和叙事用途](docs/screenshots/09-wall-playback.jpg)
+![播放视频候选，查看源内范围、分辨率和叙事用途](docs/screenshots/09-wall-playback-dark.jpg)
 
 <details>
 <summary>查看组合筛选、审核保存和 JSON / CSV 导出</summary>
 
-![使用关键词、章节、来源和审核状态定位候选](docs/screenshots/08-wall-filter.jpg)
+![使用关键词、章节、来源和审核状态定位候选](docs/screenshots/08-wall-filter-dark.jpg)
 
-![修改审核结论和备注并保存](docs/screenshots/10-wall-review-saved.jpg)
+![修改审核结论和备注并保存](docs/screenshots/10-wall-review-saved-dark.jpg)
 
 ![从同一次审核导出的 JSON 与 CSV 记录](docs/screenshots/11-wall-export.jpg)
 

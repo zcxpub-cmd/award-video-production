@@ -4,10 +4,10 @@
 
 | 截图 | 展示内容 |
 |---|---|
-| [素材墙总览](07-wall-overview.jpg) | 六份视频、图片和音频候选，显示来源、用途、对应句子和审核进度 |
-| [组合筛选](08-wall-filter.jpg) | 同时用关键词、章节、来源和审核状态定位一个候选 |
-| [视频播放与信息](09-wall-playback.jpg) | 视频预览、建议使用的源内范围、分辨率和叙事用途 |
-| [审核保存](10-wall-review-saved.jpg) | 修改审核决定和备注，显示本地保存结果 |
+| [素材墙总览](07-wall-overview-dark.jpg) | 六份视频、图片和音频候选，显示来源、用途、对应句子和审核进度 |
+| [组合筛选](08-wall-filter-dark.jpg) | 同时用关键词、章节、来源和审核状态定位一个候选 |
+| [视频播放与信息](09-wall-playback-dark.jpg) | 视频预览、建议使用的源内范围、分辨率和叙事用途 |
+| [审核保存](10-wall-review-saved-dark.jpg) | 修改审核决定和备注，显示本地保存结果 |
 | [导出审核](11-wall-export.jpg) | 同一次审核实际导出的 JSON 和 CSV 节选 |
 | [智能体工具发现](12-agent-discovery.jpg) | `list` 返回三个工具的名称和素材盘点的参数结构 |
 | [智能体素材盘点](13-agent-inventory.jpg) | `inventory` 的目录输入与实际盘点结果 |
