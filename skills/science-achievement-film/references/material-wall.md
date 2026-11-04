@@ -115,7 +115,7 @@ python3 scripts/material_wall.py build project/materials.json \
 python3 scripts/material_wall.py serve project/wall-v1 --port 8765
 ```
 
-打开命令打印的 `http://127.0.0.1:8765/`。端口占用时换用 `--port 8766`，或 `--port 0` 自动分配。终端保持运行，按 `Ctrl+C` 停止。双击 HTML 不具备持久化或视频 Range 服务，会显示启动说明。
+打开命令打印的本机地址，从动态首页点「进入素材墙」。端口占用时换用 `--port 8766`，或 `--port 0` 自动分配。终端保持运行，按 `Ctrl+C` 停止。双击 `index.html` 可离线查看动态首页和启动说明。素材播放和审核保存由本机服务提供。
 
 1. 搜索编号、文件名、章节、来源、句子、用途或审核备注；可以叠加章节、来源、审核状态筛选。
 2. 打开卡片，查看图片 / 视频 / 音频与元数据；视频支持拖动。媒体缺失和解码问题显示在详情。

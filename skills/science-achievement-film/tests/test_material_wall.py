@@ -62,6 +62,26 @@ class WallTests(unittest.TestCase):
     def post_headers(self):
         return {"Origin": self.origin, "X-Wall-Token": self.server.wall_state.token, "Content-Type": "application/json"}
 
+    def test_homepage_and_wall_have_distinct_routes(self):
+        self.start()
+        status, headers, home = self.request("/")
+        self.assertEqual(status, 200)
+        self.assertIn("Content-Security-Policy", headers)
+        self.assertIn(b'./home.css', home)
+        self.assertIn(b'id="enter-wall"', home)
+        self.assertEqual(self.request("/index.html")[2], home)
+        self.assertEqual((self.output / "index.html").read_bytes(), home)
+        self.assertIn(b'id="wall-title"', self.request("/wall.html")[2])
+
+    def test_homepage_also_opens_legacy_wall(self):
+        self.start()
+        legacy = (self.output / "wall.html").read_bytes()
+        (self.output / "wall.html").replace(self.output / "index.html")
+        status, _, page = self.request("/wall.html")
+        self.assertEqual(status, 200)
+        self.assertEqual(page, legacy)
+        self.assertIn(b'id="enter-wall"', self.request("/")[2])
+
     def test_build_outputs_and_ai_rule(self):
         result = self.build()
         self.assertEqual(result["asset_count"], 2)

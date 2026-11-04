@@ -27,7 +27,7 @@ DENY_NAMES={'.env','.DS_Store','config.toml','auth.json','reviews.json','media-m
 PRIVATE_PARTS={'local','.local','private','.private','private-config','local-config'}
 PRIVATE_FILES={'local-runtime.md','local-manifest.json','runtime-config.json'}
 IMAGE_EXT={'.png','.jpg','.jpeg'}
-PUBLIC_PATHS = ('README.md', 'LICENSE', 'NOTICE.md', '.gitignore', 'edition.json',
+PUBLIC_PATHS = ('README.md', '打开影序.html', 'LICENSE', 'NOTICE.md', '.gitignore', 'edition.json',
                 '.codex-plugin', '.agents', 'skills', 'docs')
 
 

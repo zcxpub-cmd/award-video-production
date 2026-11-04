@@ -2,15 +2,19 @@
 
 **让故事，连接脉动。**
 
-面向智能体的视频制作工具集，**当前版本 v1.1.0**。用于颁奖、成果发布和科学传播视频，从权威资料与文案、素材审核到剪辑、后期交接和交付归档。
+面向智能体的视频制作工具集。用于颁奖、成果发布和科学传播视频，从权威资料与文案、素材审核到剪辑、后期交接和交付归档。
 
 影序原名「颁奖视频制作」。仓库地址和插件安装命令继续沿用原有标识。
 
 [开源版使用说明书](docs/使用说明书.md) · [逐项功能说明](docs/features.md) · [快速上手](skills/science-achievement-film/references/quickstart.md) · [能力与边界](skills/science-achievement-film/references/capabilities.md) · [验证范围](skills/science-achievement-film/references/verification.md)
 
+[下载含动态首页的最新版 ZIP](https://github.com/zcxpub-cmd/award-video-production/archive/refs/heads/main.zip)。解压后双击 `打开影序.html`。启动本地服务后，在动态首页点「进入素材墙」开始审核。
+
 ## 功能实拍
 
 以下是开源版用虚构工程运行得到的浏览器界面、命令输出和成片画面。素材墙实拍来自当前主分支的暗黑配色。[完整截图索引](docs/screenshots/README.md)
+
+![开源版动态首页及进入素材墙按钮](docs/screenshots/22-open-source-home.jpg)
 
 ### 素材墙与审核
 
@@ -144,7 +148,7 @@ cd skills/science-achievement-film
 python3 scripts/demo_project.py --output /path/to/new-demo --ffmpeg /path/to/full/ffmpeg --font "Noto Sans CJK SC"
 ```
 
-演示自己生成测试图形和正弦音（不是人物声音或真实成果），实际跑通文稿→素材墙→字幕标题→2.4秒短片/分项片→QC→归档。输出目录必须在仓库外；只在新目录输出，不联网、不调用生成模型，不自动判定科学或用户验收。完成后按输出的START_HERE.md启动素材墙。若PATH中FFmpeg已有所需过滤器可省略该参数。
+演示生成测试图形和正弦音，跑通文稿、素材墙、字幕标题、成片和分项片、技术质检与归档。输出目录必须是仓库外的新目录。按输出的 `START_HERE.md` 启动服务，在动态首页点「进入素材墙」。如果 `PATH` 中的 FFmpeg 已具备所需过滤器，可省略 `--ffmpeg`。
 
 ## 测试与发布
 

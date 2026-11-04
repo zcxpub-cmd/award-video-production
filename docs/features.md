@@ -105,7 +105,7 @@ python3 scripts/material_wall.py build /path/to/project/wall-input.json --output
 python3 scripts/material_wall.py serve /path/to/project/wall-v1 --port 8765
 ```
 
-在浏览器打开 `http://127.0.0.1:8765/`。需要将墙和媒体一起搬迁时，构建命令增加 `--copy-media`。默认不复制大原件；服务停止后不能继续HTTP播放，用相同`serve`命令恢复。
+在浏览器打开 `http://127.0.0.1:8765/`，从动态首页点「进入素材墙」。需要把素材墙和媒体一起搬迁时，在构建命令加 `--copy-media`。下次可用同一条 `serve` 命令继续审核。
 
 **输出：** 完整本地页面、清单、审核记录、媒体白名单、可选缩略图与代理。**边界：** 本机单用户服务，监听回环地址，无公网发布、账号管理和多人合并；项目运行目录可能含本机路径，不属于插件公开源代码。
 

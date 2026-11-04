@@ -34,7 +34,7 @@ python3 scripts/material_wall.py build "$FILM_PROJECT/out/wall-input.json" --out
 python3 scripts/material_wall.py serve "$FILM_PROJECT/out/wall" --port 8765
 ```
 
-在浏览器打开 http://127.0.0.1:8765 ，观看拟用动作、审核并导出。关掉服务后墙不能继续HTTP播放；按同一serve命令恢复，审核记录仍在。分享墙副本用 `--copy-media`，只对清单列明且有权分享的文件复制。
+在浏览器打开 http://127.0.0.1:8765 ，从动态首页点「进入素材墙」，播放候选、审核并导出。下次用同一条 `serve` 命令启动服务，可继续使用已有审核记录。分享素材墙副本用 `--copy-media`，只复制清单列明且有权分享的文件。
 
 ## 3. 外部生产与本地合成
 

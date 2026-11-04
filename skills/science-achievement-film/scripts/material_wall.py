@@ -30,7 +30,18 @@ MIME = {
     ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".gif": "image/gif", ".avif": "image/avif", ".tif": "image/tiff", ".tiff": "image/tiff", ".heic": "image/heic", ".bmp": "image/bmp", ".exr": "image/x-exr",
     ".mp3": "audio/mpeg", ".wav": "audio/wav", ".m4a": "audio/mp4", ".aac": "audio/aac", ".flac": "audio/flac", ".ogg": "audio/ogg", ".aif": "audio/aiff", ".aiff": "audio/aiff",
 }
-STATIC = {"/": ("index.html", "text/html; charset=utf-8"), "/index.html": ("index.html", "text/html; charset=utf-8"), "/app.js": ("app.js", "text/javascript; charset=utf-8"), "/style.css": ("style.css", "text/css; charset=utf-8")}
+TEMPLATES = Path(__file__).resolve().parent.parent / "assets/wall"
+HOME_STATIC = {
+    "/": ("home.html", "text/html; charset=utf-8"),
+    "/index.html": ("home.html", "text/html; charset=utf-8"),
+    "/home.css": ("home.css", "text/css; charset=utf-8"),
+    "/home.js": ("home.js", "text/javascript; charset=utf-8"),
+}
+WALL_STATIC = {
+    "/wall.html": ("wall.html", "text/html; charset=utf-8"),
+    "/app.js": ("app.js", "text/javascript; charset=utf-8"),
+    "/style.css": ("style.css", "text/css; charset=utf-8"),
+}
 VIDEO_EXTENSIONS = {suffix for suffix, mime in MIME.items() if mime.startswith("video/")} | {".mxf"}
 
 
@@ -146,9 +157,10 @@ def build(args):
         warnings.append("代理生成需要本机 ffmpeg 和 ffprobe；缺失时跳过，不会自动安装。")
     try:
         (temporary / "media").mkdir()
-        templates = Path(__file__).resolve().parent.parent / "assets" / "wall"
-        for filename in ("index.html", "app.js", "style.css"):
-            shutil.copyfile(templates / filename, temporary / filename)
+        for filename in ("app.js", "style.css", "home.css", "home.js"):
+            shutil.copyfile(TEMPLATES / filename, temporary / filename)
+        shutil.copyfile(TEMPLATES / "home.html", temporary / "index.html")
+        shutil.copyfile(TEMPLATES / "index.html", temporary / "wall.html")
         for original in data["assets"]:
             if not isinstance(original, dict):
                 raise ValueError("每个素材记录必须是对象")
@@ -438,9 +450,14 @@ class WallHandler(BaseHTTPRequestHandler):
         parsed = urlsplit(self.path)
         route = unquote(parsed.path)
         try:
-            if route in STATIC:
-                filename, mime = STATIC[route]
+            if route in HOME_STATIC:
+                filename, mime = HOME_STATIC[route]
+                self.reply(200, (TEMPLATES / filename).read_bytes(), mime)
+            elif route in WALL_STATIC:
+                filename, mime = WALL_STATIC[route]
                 path = self.state.root / filename
+                if filename == "wall.html" and not path.exists() and not path.is_symlink():
+                    path = self.state.root / "index.html"  # Wall directories built before the homepage.
                 if path.is_symlink():
                     raise ValueError("页面文件不能是符号链接")
                 self.reply(200, path.read_bytes(), mime)
@@ -540,7 +557,7 @@ def make_server(directory, port=0):
 
 def serve(args):
     server = make_server(args.directory, args.port)
-    print(f"素材墙已启动：http://127.0.0.1:{server.server_port}/\n审核保存在 {server.wall_state.root / 'reviews.json'}\n按 Ctrl+C 停止。", flush=True)
+    print(f"影序首页：http://127.0.0.1:{server.server_port}/\n进入素材墙后可审核。记录保存在 {server.wall_state.root / 'reviews.json'}\n按 Ctrl+C 停止。", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

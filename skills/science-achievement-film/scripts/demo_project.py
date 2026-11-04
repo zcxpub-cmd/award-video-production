@@ -18,6 +18,7 @@ from datetime import datetime, timezone
 
 DURATION = 2.4
 REQUIRED_SCRIPTS = ("demo_project.py", "content_tools.py", "material_wall.py", "media_tools.py", "archive_tools.py")
+WALL_FILES = ("index.html", "app.js", "style.css", "home.html", "home.css", "home.js")
 REQUIRED_FILTERS = {"testsrc2", "sine", "volume", "ass", "blackdetect", "freezedetect", "metadata"}
 
 
@@ -51,7 +52,7 @@ def preflight(args, source):
     for name in REQUIRED_SCRIPTS:
         if not (source / name).is_file():
             raise DemoError(f"发行工具缺失：scripts/{name}")
-    for name in ("index.html", "app.js", "style.css"):
+    for name in WALL_FILES:
         if not (source.parent / "assets/wall" / name).is_file():
             raise DemoError(f"发行页面缺失：assets/wall/{name}")
     listed = run_process([ffmpeg, "-hide_banner", "-filters"], timeout=20).stdout
@@ -107,7 +108,7 @@ def start_here():
 python3 rebuild-tools/scripts/material_wall.py serve wall --port 8765
 ```
 
-然后打开 http://127.0.0.1:8765/ 。本演示不会自动启动服务。全部素材初始待审；审核与备注另存 wall/reviews.json。服务停后再启动仍可继续。
+然后打开 http://127.0.0.1:8765/ ，从动态首页点「进入素材墙」。全部素材初始待审。审核与备注另存 wall/reviews.json，重启服务后可继续。
 
 在本项目目录验证归档：
 
@@ -140,7 +141,7 @@ def demo(args):
             (root / folder).mkdir(parents=True)
         for name in REQUIRED_SCRIPTS:
             shutil.copyfile(source / name, root / "rebuild-tools/scripts" / name)
-        for name in ("index.html", "app.js", "style.css"):
+        for name in WALL_FILES:
             shutil.copyfile(source.parent / "assets/wall" / name, root / "rebuild-tools/assets/wall" / name)
         scripts = root / "rebuild-tools/scripts"
         create_inputs(root, args.font)
