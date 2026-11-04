@@ -8,13 +8,13 @@
 
 [开源版使用说明书](docs/使用说明书.md) · [逐项功能说明](docs/features.md) · [快速上手](skills/science-achievement-film/references/quickstart.md) · [能力与边界](skills/science-achievement-film/references/capabilities.md) · [验证范围](skills/science-achievement-film/references/verification.md)
 
-[下载含动态首页的最新版 ZIP](https://github.com/zcxpub-cmd/award-video-production/archive/refs/heads/main.zip)。解压后双击 `打开影序.html`。启动本地服务后，在动态首页点「进入素材墙」开始审核。
+[下载含 18 景动态首页的最新版 ZIP](https://github.com/zcxpub-cmd/award-video-production/archive/refs/heads/main.zip)。解压后双击 `打开影序.html`。首页每次随机取一景，18 景在同一轮中不重复。已有素材墙时可用 `agent_tools.py launch` 启动，从首页点「进入素材墙」。[画面来源](docs/home-cover-assets.md)
 
 ## 功能实拍
 
 以下是开源版用虚构工程运行得到的浏览器界面、命令输出和成片画面。素材墙实拍来自当前主分支的暗黑配色。[完整截图索引](docs/screenshots/README.md)
 
-![开源版动态首页及进入素材墙按钮](docs/screenshots/22-open-source-home.jpg)
+![开源版动态首页的抽景画面及进入素材墙按钮](docs/screenshots/23-open-source-scenes.jpg)
 
 ### 素材墙与审核
 

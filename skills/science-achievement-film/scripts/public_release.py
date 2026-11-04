@@ -29,6 +29,27 @@ PRIVATE_FILES={'local-runtime.md','local-manifest.json','runtime-config.json'}
 IMAGE_EXT={'.png','.jpg','.jpeg'}
 PUBLIC_PATHS = ('README.md', '打开影序.html', 'LICENSE', 'NOTICE.md', '.gitignore', 'edition.json',
                 '.codex-plugin', '.agents', 'skills', 'docs')
+COVER = Path('skills/science-achievement-film/assets/wall/cover')
+
+
+def cover_hashes(root):
+    manifest = root / COVER.with_name('cover-manifest.json')
+    if not manifest.exists():
+        return {}
+    assets = json.loads(manifest.read_text(encoding='utf-8'))
+    if not isinstance(assets, dict) or len(assets) != 36:
+        raise ValueError('The cover manifest must list 18 poster/video pairs')
+    hashes = {}
+    for name, record in assets.items():
+        if (not re.fullmatch(r'[a-z]+\.(mp4|webp)', name) or not isinstance(record, dict)
+                or not isinstance(record.get('sha256'), str) or not re.fullmatch(r'[0-9a-f]{64}', record['sha256'])):
+            raise ValueError('Invalid cover manifest entry')
+        hashes[COVER / name] = record['sha256']
+    videos = {p.stem for p in hashes if p.suffix == '.mp4'}
+    posters = {p.stem for p in hashes if p.suffix == '.webp'}
+    if videos != posters or len(videos) != 18:
+        raise ValueError('Every cover video must have a matching poster')
+    return hashes
 
 
 def edition_status(root):
@@ -63,10 +84,18 @@ def file_list(root):
 def scan(root,deny_terms=()):
     root=Path(root).resolve();files=file_list(root);findings=[];screenshots=[]
     edition=edition_status(root)
+    cover = cover_hashes(root)
+    for path in cover:
+        if not (root / path).is_file():
+            findings.append({'path':path.as_posix(),'line':None,'rule':'cover_asset_missing'})
     if edition and (edition['edition']=='local' or not edition['publishable']):
         findings.append({'path':'edition.json','line':None,'rule':'not_publishable_edition'})
     for p in files:
         relative=p.relative_to(root);rel=str(relative)
+        if relative in cover:
+            if hashlib.sha256(p.read_bytes()).hexdigest() != cover[relative]:
+                findings.append({'path':rel,'line':None,'rule':'cover_asset_hash_mismatch'})
+            continue
         if any(part.casefold() in PRIVATE_PARTS for part in relative.parts) or p.name.casefold() in PRIVATE_FILES:
             findings.append({'path':rel,'line':None,'rule':'local_private_configuration'})
         if p.name in DENY_NAMES or p.name.endswith(('.log','.mp4','.mp3','.wav','.drp','.pem','.key')):

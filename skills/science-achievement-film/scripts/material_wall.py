@@ -19,6 +19,7 @@ import threading
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, unquote, urlsplit
+import webbrowser
 
 VERSION = "1.0.0"
 ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,95}\Z")
@@ -36,6 +37,7 @@ HOME_STATIC = {
     "/index.html": ("home.html", "text/html; charset=utf-8"),
     "/home.css": ("home.css", "text/css; charset=utf-8"),
     "/home.js": ("home.js", "text/javascript; charset=utf-8"),
+    "/cover-scenes.js": ("cover-scenes.js", "text/javascript; charset=utf-8"),
 }
 WALL_STATIC = {
     "/wall.html": ("wall.html", "text/html; charset=utf-8"),
@@ -157,8 +159,9 @@ def build(args):
         warnings.append("代理生成需要本机 ffmpeg 和 ffprobe；缺失时跳过，不会自动安装。")
     try:
         (temporary / "media").mkdir()
-        for filename in ("app.js", "style.css", "home.css", "home.js"):
+        for filename in ("app.js", "style.css", "home.css", "home.js", "cover-scenes.js"):
             shutil.copyfile(TEMPLATES / filename, temporary / filename)
+        shutil.copytree(TEMPLATES / "cover", temporary / "cover")
         shutil.copyfile(TEMPLATES / "home.html", temporary / "index.html")
         shutil.copyfile(TEMPLATES / "index.html", temporary / "wall.html")
         for original in data["assets"]:
@@ -453,6 +456,13 @@ class WallHandler(BaseHTTPRequestHandler):
             if route in HOME_STATIC:
                 filename, mime = HOME_STATIC[route]
                 self.reply(200, (TEMPLATES / filename).read_bytes(), mime)
+            elif re.fullmatch(r"/cover/[a-z]+\.(mp4|webp)", route):
+                cover = TEMPLATES / "cover"
+                path = cover / route.rsplit("/", 1)[1]
+                if cover.is_symlink() or path.is_symlink():
+                    raise ValueError("首页媒体不能是符号链接")
+                with path.open("rb") as handle:
+                    self.stream_media(handle, path.stat().st_size, MIME[path.suffix])
             elif route in WALL_STATIC:
                 filename, mime = WALL_STATIC[route]
                 path = self.state.root / filename
@@ -492,32 +502,35 @@ class WallHandler(BaseHTTPRequestHandler):
     def media(self, route):
         handle, size, mime = self.state.open_media(route)
         with handle:
-            try:
-                start, end, partial = range_bounds(self.headers.get("Range"), size)
-            except ValueError:
-                self.reply(416, b"", extra={"Content-Range": f"bytes */{size}"})
-                return
-            length = max(0, end - start + 1)
-            self.send_response(206 if partial else 200)
-            self.security_headers()
-            self.send_header("Content-Type", mime)
-            self.send_header("Accept-Ranges", "bytes")
-            self.send_header("Content-Length", str(length))
-            if partial:
-                self.send_header("Content-Range", f"bytes {start}-{end}/{size}")
-            self.end_headers()
-            if self.command == "HEAD":
-                return
-            handle.seek(start)
-            try:
-                while length:
-                    chunk = handle.read(min(256 * 1024, length))
-                    if not chunk:
-                        break
-                    self.wfile.write(chunk)
-                    length -= len(chunk)
-            except (BrokenPipeError, ConnectionResetError):
-                pass
+            self.stream_media(handle, size, mime)
+
+    def stream_media(self, handle, size, mime):
+        try:
+            start, end, partial = range_bounds(self.headers.get("Range"), size)
+        except ValueError:
+            self.reply(416, b"", extra={"Content-Range": f"bytes */{size}"})
+            return
+        length = max(0, end - start + 1)
+        self.send_response(206 if partial else 200)
+        self.security_headers()
+        self.send_header("Content-Type", mime)
+        self.send_header("Accept-Ranges", "bytes")
+        self.send_header("Content-Length", str(length))
+        if partial:
+            self.send_header("Content-Range", f"bytes {start}-{end}/{size}")
+        self.end_headers()
+        if self.command == "HEAD":
+            return
+        handle.seek(start)
+        try:
+            while length:
+                chunk = handle.read(min(256 * 1024, length))
+                if not chunk:
+                    break
+                self.wfile.write(chunk)
+                length -= len(chunk)
+        except (BrokenPipeError, ConnectionResetError):
+            pass
 
     def do_POST(self):
         if not self.headers_safe() or self.headers.get("Origin") != "http://" + self.headers.get("Host", "") or not secrets.compare_digest(self.headers.get("X-Wall-Token", ""), self.state.token):
@@ -557,8 +570,11 @@ def make_server(directory, port=0):
 
 def serve(args):
     server = make_server(args.directory, args.port)
-    print(f"影序首页：http://127.0.0.1:{server.server_port}/\n进入素材墙后可审核。记录保存在 {server.wall_state.root / 'reviews.json'}\n按 Ctrl+C 停止。", flush=True)
+    home = f"http://127.0.0.1:{server.server_port}/"
+    print(f"影序首页：{home}\n进入素材墙后可审核。记录保存在 {server.wall_state.root / 'reviews.json'}\n按 Ctrl+C 停止。", flush=True)
     try:
+        if args.open_browser:
+            threading.Thread(target=webbrowser.open, args=(home,), daemon=True).start()
         server.serve_forever()
     except KeyboardInterrupt:
         pass
@@ -581,6 +597,7 @@ def main(argv=None):
     server = commands.add_parser("serve", help="仅在 127.0.0.1 启动本机审核服务，Ctrl+C 停止")
     server.add_argument("directory", help="build 生成的素材墙目录")
     server.add_argument("--port", type=int, default=8765, help="本机端口（默认 8765，0 自动分配）")
+    server.add_argument("--open", dest="open_browser", action="store_true", help="启动后用默认浏览器打开影序首页")
     server.set_defaults(func=serve)
     args = parser.parse_args(argv)
     try:

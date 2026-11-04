@@ -27,19 +27,28 @@ h1 span { color: var(--copper); }
 .primary { background: var(--copper); color: #251612; font-weight: 700; }
 .primary span { margin-left: 8px; }
 .secondary { border: 1px solid var(--line); color: var(--foreground); }
-.visual { overflow: hidden; border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 24px 90px #0005; }
-.visual svg { display: block; width: 100%; aspect-ratio: 720 / 580; }
-.frames { transform-origin: 51% 50%; animation: float 9s ease-in-out infinite alternate; }
-.glow { animation: breathe 6s ease-in-out infinite alternate; }
-.scan { animation: sweep 10s ease-in-out infinite alternate; }
-.spark { animation: breathe 2.7s ease-in-out infinite alternate; }
-.spark-late { animation-delay: -1.5s; }
+.visual {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 720 / 580;
+  background: #171316;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 24px 90px #0005;
+}
+.visual img, .visual video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.visual video { opacity: 0; }
+.scene-name {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: #171316d9;
+  color: var(--foreground);
+  font-size: 12px;
+}
 
-@keyframes float { from { transform: translate(-8px, 6px) rotate(-6deg); } to { transform: translate(14px, -11px) rotate(8deg); } }
-@keyframes breathe { from { opacity: .4; } to { opacity: 1; } }
-@keyframes sweep { from { transform: translateY(-125px); } to { transform: translateY(125px); } }
-
-[data-motion="paused"] .visual svg * { animation-play-state: paused; }
 .quick-start { padding: 27px 0 36px; border-top: 1px solid var(--line); }
 .quick-start h2 { margin: 6px 0 10px; }
 .quick-start p:not(.eyebrow) { max-width: 76ch; color: var(--muted); }
@@ -51,10 +60,9 @@ button { color: var(--foreground); background: #211d21; border: 1px solid var(--
 @media (max-width: 800px) {
   .site-header, main, footer { width: calc(100% - 40px); }
   .hero { grid-template-columns: 1fr; min-height: auto; gap: 24px; }
-  .visual svg { aspect-ratio: 2 / 1; }
+  .visual { aspect-ratio: 2 / 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .visual svg * { animation: none; }
   #motion-toggle { display: none; }
 }

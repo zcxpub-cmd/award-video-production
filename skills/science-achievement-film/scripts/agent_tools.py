@@ -64,10 +64,22 @@ def main():
     commands.add_parser("list", help="Print the available tools and input schemas")
     call = commands.add_parser("invoke", help="Read one JSON argument object from stdin")
     call.add_argument("tool", choices=TOOLS)
+    launch = commands.add_parser("launch", help="Start the workspace and open the Yingxu homepage")
+    launch.add_argument("directory", help="Existing material wall directory")
+    launch.add_argument("--port", type=int, default=8765)
+    launch.add_argument("--no-open", action="store_true", help="Print the homepage URL without opening a browser")
     args = parser.parse_args()
     if args.command == "list":
         print(json.dumps({"tools": catalog()}, ensure_ascii=False))
         return 0
+
+    if args.command == "launch":
+        from material_wall import main as wall_main
+
+        command = ["serve", args.directory, "--port", str(args.port)]
+        if not args.no_open:
+            command.append("--open")
+        return wall_main(command)
 
     try:
         response = invoke(args.tool, json.load(sys.stdin))

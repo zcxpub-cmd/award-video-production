@@ -18,7 +18,7 @@ from datetime import datetime, timezone
 
 DURATION = 2.4
 REQUIRED_SCRIPTS = ("demo_project.py", "content_tools.py", "material_wall.py", "media_tools.py", "archive_tools.py")
-WALL_FILES = ("index.html", "app.js", "style.css", "home.html", "home.css", "home.js")
+WALL_FILES = ("index.html", "app.js", "style.css", "home.html", "home.css", "home.js", "cover-scenes.js", "cover-manifest.json", "cover-license.txt")
 REQUIRED_FILTERS = {"testsrc2", "sine", "volume", "ass", "blackdetect", "freezedetect", "metadata"}
 
 
@@ -144,6 +144,7 @@ def demo(args):
         for name in WALL_FILES:
             shutil.copyfile(source.parent / "assets/wall" / name, root / "rebuild-tools/assets/wall" / name)
         scripts = root / "rebuild-tools/scripts"
+        shutil.copytree(source.parent / "assets/wall/cover", root / "rebuild-tools/assets/wall/cover")
         create_inputs(root, args.font)
         write_new(root / "START_HERE.md", start_here())
         python = sys.executable
