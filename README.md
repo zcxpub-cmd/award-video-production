@@ -8,7 +8,7 @@
 
 [开源版使用说明书](docs/使用说明书.md) · [逐项功能说明](docs/features.md) · [快速上手](skills/science-achievement-film/references/quickstart.md) · [能力与边界](skills/science-achievement-film/references/capabilities.md) · [验证范围](skills/science-achievement-film/references/verification.md)
 
-[下载含 18 景动态首页的最新版 ZIP](https://github.com/zcxpub-cmd/award-video-production/archive/refs/heads/main.zip)。解压后双击 `打开影序.html`。首页每次随机取一景，18 景在同一轮中不重复。已有素材墙时可用 `agent_tools.py launch` 启动，从首页点「进入素材墙」。[画面来源](docs/home-cover-assets.md)
+[下载 v1.2.0 源码 ZIP](https://github.com/zcxpub-cmd/award-video-production/releases/download/v1.2.0/award-video-production-v1.2.0.zip) · [发布说明与校验文件](https://github.com/zcxpub-cmd/award-video-production/releases/tag/v1.2.0)。解压后双击 `打开影序.html`。首页每次随机取一景，18 景在同一轮中不重复。已有素材墙时可用 `agent_tools.py launch` 启动，从首页点「进入素材墙」。[画面来源](docs/home-cover-assets.md)
 
 ## 功能实拍
 
@@ -106,7 +106,7 @@
 ## 安装与调用
 
 支持本地进程的智能体宿主可以使用 JSON 工具入口，见[智能体接入说明](docs/agent-integration.md)。
-相比 v1.0.0 的新增功能、配图与修复见 [v1.1.0 发布说明](docs/release-v1.1.0.md)。
+[v1.2.0 发布说明](docs/release-v1.2.0.md)记录本次首页和启动改动。相比 v1.0.0 的上一版变更见 [v1.1.0 发布说明](docs/release-v1.1.0.md)。
 
 ### Codex 插件
 
@@ -156,7 +156,7 @@ python3 scripts/demo_project.py --output /path/to/new-demo --ffmpeg /path/to/ful
 python3 -m unittest discover -s skills/science-achievement-film/tests -v
 python3 skills/science-achievement-film/tests/regression_filmkit.py
 python3 skills/science-achievement-film/scripts/public_release.py scan .
-python3 skills/science-achievement-film/scripts/public_release.py build . --out ../award-video-production-v1.1.0.zip
+python3 skills/science-achievement-film/scripts/public_release.py build . --out ../award-video-production-v1.2.0.zip
 ```
 
 媒体回归需要支持相关过滤器的 FFmpeg；可通过 `MEDIA_TEST_FFMPEG` / `MEDIA_TEST_FFPROBE` 指定。测试使用临时合成素材，外部服务使用离线模拟；未运行付费模型或用户工程。发布工具只打包公开白名单，排除git历史、私有配置、制作输出和报告。隐私扫描是辅助，发布前仍应人工检查内容与许可证。
