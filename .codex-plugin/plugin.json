@@ -1,6 +1,6 @@
 {
   "name": "science-achievement-film",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "颁奖与成果展示视频制作：内置素材墙、文稿、剪辑字幕、技术检查、归档工具及外部软件操作方法。",
   "author": {
     "name": "Award Video Production contributors"
@@ -29,7 +29,7 @@
       "后期与独立审核片",
       "归档与交付核验"
     ],
-    "defaultPrompt": "打开影序动态首页。我会从首页进入素材墙，再按本次要求制作或修改视频。",
+    "defaultPrompt": "打开影序开源工作台的动态首页，再按本次要求创建、剪辑或导出视频。",
     "brandColor": "#1B4965"
   },
   "license": "MIT"

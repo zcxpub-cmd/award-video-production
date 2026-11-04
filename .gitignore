@@ -15,3 +15,5 @@ reports/
 runtime-config.local.json
 reviews.json
 media-map.json
+node_modules/
+*.tsbuildinfo

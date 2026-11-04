@@ -42,7 +42,10 @@
     </section>
     <section class="quick-start" id="quick-start" aria-labelledby="quick-title">
       <p class="eyebrow">QUICK START</p>
-      <h2 id="quick-title">启动素材工作台</h2>
+      <h2 id="quick-title">安装并打开完整工作台</h2>
+      <p>解压发行 ZIP 后，macOS 双击「启动影序.command」，Windows 双击「start-yingxu.bat」，Linux 运行「sh start-yingxu.sh」。首次启动在用户目录安装依赖。需要 Python 3.10 或更新版本和网络。</p>
+      <p><a href="http://127.0.0.1:8790/">打开已启动的开源工作台</a>。可新建项目、导入素材、编辑时间线、套用提示词模板与导出。</p>
+      <h2>命令行素材审核演示</h2>
       <p>在下载包根目录打开终端。先运行内置演示，生成一份新的本地素材墙。需要 Python 3.10+、支持字幕滤镜的 FFmpeg 和 FFprobe。</p>
       <pre><code>python3 skills/science-achievement-film/scripts/demo_project.py --output "../yingxu-demo"
 python3 skills/science-achievement-film/scripts/agent_tools.py launch "../yingxu-demo/wall" --port 8765</code></pre>

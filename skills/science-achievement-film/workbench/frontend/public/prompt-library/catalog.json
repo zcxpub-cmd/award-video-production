@@ -1,0 +1,324 @@
+{
+  "categories": [
+    {
+      "id": "planning",
+      "label": "策划与文案"
+    },
+    {
+      "id": "storyboard",
+      "label": "分镜与叙事"
+    },
+    {
+      "id": "camera",
+      "label": "摄影与运镜"
+    },
+    {
+      "id": "generation",
+      "label": "视频生成"
+    },
+    {
+      "id": "continuity",
+      "label": "角色与连续性"
+    },
+    {
+      "id": "science",
+      "label": "科学可视化"
+    },
+    {
+      "id": "animation",
+      "label": "动画与动效"
+    },
+    {
+      "id": "editing",
+      "label": "剪辑与节奏"
+    },
+    {
+      "id": "audio",
+      "label": "声音与配音"
+    },
+    {
+      "id": "post",
+      "label": "调色与后期"
+    },
+    {
+      "id": "titles",
+      "label": "字幕与包装"
+    },
+    {
+      "id": "review",
+      "label": "审核与交付"
+    }
+  ],
+  "entries": [
+    {
+      "id": "yingxu-review",
+      "title": "在交付前，再看一遍",
+      "category": "review",
+      "categories": [
+        "review"
+      ],
+      "description": "将技术检查与内容验收分别记录。",
+      "sources": [
+        {
+          "plugin": "影序原创模板",
+          "version": "工作台 0.2",
+          "path": "review",
+          "license": "项目内原创",
+          "sha256": "887b0c2d8d63f99cadcce19863c770154f84cf3a8e9026b53dcbd73ef2cb5092"
+        }
+      ],
+      "kind": "template",
+      "executable": false,
+      "preview": "将技术检查与内容验收分别记录。",
+      "contentFile": "/prompt-library/content/templates.json"
+    },
+    {
+      "id": "yingxu-titles",
+      "title": "让文字，成为画面的一部分",
+      "category": "titles",
+      "categories": [
+        "titles"
+      ],
+      "description": "保持标题、字幕与背景独立。",
+      "sources": [
+        {
+          "plugin": "影序原创模板",
+          "version": "工作台 0.2",
+          "path": "titles",
+          "license": "项目内原创",
+          "sha256": "26b6934a17b5d80ec134bee1bb481055166fe4f25d4977d657797711956466cf"
+        }
+      ],
+      "kind": "template",
+      "executable": false,
+      "preview": "保持标题、字幕与背景独立。",
+      "contentFile": "/prompt-library/content/templates.json"
+    },
+    {
+      "id": "yingxu-post",
+      "title": "建立克制而统一的色调",
+      "category": "post",
+      "categories": [
+        "post"
+      ],
+      "description": "从曝光与白平衡开始统一画面。",
+      "sources": [
+        {
+          "plugin": "影序原创模板",
+          "version": "工作台 0.2",
+          "path": "post",
+          "license": "项目内原创",
+          "sha256": "07a1df272bc853f93f92c8cb9308fd23a4531f93e9b0c48ad99bf0bb91d9eacb"
+        }
+      ],
+      "kind": "template",
+      "executable": false,
+      "preview": "从曝光与白平衡开始统一画面。",
+      "contentFile": "/prompt-library/content/templates.json"
+    },
+    {
+      "id": "yingxu-audio",
+      "title": "让声音，有自己的叙事",
+      "category": "audio",
+      "categories": [
+        "audio"
+      ],
+      "description": "分别安排旁白、环境声与音乐。",
+      "sources": [
+        {
+          "plugin": "影序原创模板",
+          "version": "工作台 0.2",
+          "path": "audio",
+          "license": "项目内原创",
+          "sha256": "0258232af3027402dac0e27929c8a8f4b940625c18ed9e07d0db0cc05a937bb1"
+        }
+      ],
+      "kind": "template",
+      "executable": false,
+      "preview": "分别安排旁白、环境声与音乐。",
+      "contentFile": "/prompt-library/content/templates.json"
+    },
+    {
+      "id": "yingxu-editing",
+      "title": "在动作与呼吸之间落刀",
+      "category": "editing",
+      "categories": [
+        "editing"
+      ],
+      "description": "以语义、动作和声音连接镜头。",
+      "sources": [
+        {
+          "plugin": "影序原创模板",
+          "version": "工作台 0.2",
+          "path": "editing",
+          "license": "项目内原创",
+          "sha256": "3a6f89622e0b39fbea31d305ef3b25c76fe822dfdcdde3b346b34a1b48774e32"
+        }
+      ],
+      "kind": "template",
+      "executable": false,
+      "preview": "以语义、动作和声音连接镜头。",
+      "contentFile": "/prompt-library/content/templates.json"
+    },
+    {
+      "id": "yingxu-animation",
+      "title": "为信息安排运动节奏",
+      "category": "animation",
+      "categories": [
+        "animation"
+      ],
+      "description": "让动画帮助理解先后与关系。",
+      "sources": [
+        {
+          "plugin": "影序原创模板",
+          "version": "工作台 0.2",
+          "path": "animation",
+          "license": "项目内原创",
+          "sha256": "7fa4b423bce4f53c2da8b2c1c4fd5a35b8e602dd0f9df6797d8438dd0e5618da"
+        }
+      ],
+      "kind": "template",
+      "executable": false,
+      "preview": "让动画帮助理解先后与关系。",
+      "contentFile": "/prompt-library/content/templates.json"
+    },
+    {
+      "id": "yingxu-science",
+      "title": "把机制，讲成看得见的过程",
+      "category": "science",
+      "categories": [
+        "science"
+      ],
+      "description": "科学结构优先于视觉装饰。",
+      "sources": [
+        {
+          "plugin": "影序原创模板",
+          "version": "工作台 0.2",
+          "path": "science",
+          "license": "项目内原创",
+          "sha256": "35c9e8650499826e004aae3abc1bfe02a5ec180d2ce528c5befc9d6184473c24"
+        }
+      ],
+      "kind": "template",
+      "executable": false,
+      "preview": "科学结构优先于视觉装饰。",
+      "contentFile": "/prompt-library/content/templates.json"
+    },
+    {
+      "id": "yingxu-continuity",
+      "title": "同一个角色，同一条故事线",
+      "category": "continuity",
+      "categories": [
+        "continuity"
+      ],
+      "description": "为跨镜头的连续性建立约束。",
+      "sources": [
+        {
+          "plugin": "影序原创模板",
+          "version": "工作台 0.2",
+          "path": "continuity",
+          "license": "项目内原创",
+          "sha256": "75f193a4de626145262f6997755dd641b7ce774601669948f63cf3c160568c93"
+        }
+      ],
+      "kind": "template",
+      "executable": false,
+      "preview": "为跨镜头的连续性建立约束。",
+      "contentFile": "/prompt-library/content/templates.json"
+    },
+    {
+      "id": "yingxu-generation",
+      "title": "让静帧，开始呼吸",
+      "category": "generation",
+      "categories": [
+        "generation"
+      ],
+      "description": "保留主体结构，加入克制的动态。",
+      "sources": [
+        {
+          "plugin": "影序原创模板",
+          "version": "工作台 0.2",
+          "path": "generation",
+          "license": "项目内原创",
+          "sha256": "028bce9842515210d2fb41c4bc5b8d145bd711852da171ef6a17fe83381073cb"
+        }
+      ],
+      "kind": "template",
+      "executable": false,
+      "preview": "保留主体结构，加入克制的动态。",
+      "contentFile": "/prompt-library/content/templates.json"
+    },
+    {
+      "id": "yingxu-camera",
+      "title": "设计一次有意义的运镜",
+      "category": "camera",
+      "categories": [
+        "camera"
+      ],
+      "description": "以主体与情绪决定相机运动。",
+      "sources": [
+        {
+          "plugin": "影序原创模板",
+          "version": "工作台 0.2",
+          "path": "camera",
+          "license": "项目内原创",
+          "sha256": "0c1b6c3bd88bf1fdc325a0951e829b36395338f3244d723934d2a9e5bafe59b2"
+        }
+      ],
+      "kind": "template",
+      "executable": false,
+      "preview": "以主体与情绪决定相机运动。",
+      "contentFile": "/prompt-library/content/templates.json"
+    },
+    {
+      "id": "yingxu-storyboard",
+      "title": "把文案变成可拍的分镜",
+      "category": "storyboard",
+      "categories": [
+        "storyboard"
+      ],
+      "description": "让每句话都有明确的视觉任务。",
+      "sources": [
+        {
+          "plugin": "影序原创模板",
+          "version": "工作台 0.2",
+          "path": "storyboard",
+          "license": "项目内原创",
+          "sha256": "db4a72c65528f566acfbc468525888510ed89bc3a20175c24563c4fb5b315032"
+        }
+      ],
+      "kind": "template",
+      "executable": false,
+      "preview": "让每句话都有明确的视觉任务。",
+      "contentFile": "/prompt-library/content/templates.json"
+    },
+    {
+      "id": "yingxu-planning",
+      "title": "从一句话，展开一个故事",
+      "category": "planning",
+      "categories": [
+        "planning"
+      ],
+      "description": "梳理创作目标、受众和叙事主线。",
+      "sources": [
+        {
+          "plugin": "影序原创模板",
+          "version": "工作台 0.2",
+          "path": "planning",
+          "license": "项目内原创",
+          "sha256": "270951457196e301d8e2ab0948756f7a2a1fa12f5fb8d48f5a7ff95d75d584b0"
+        }
+      ],
+      "kind": "template",
+      "executable": false,
+      "preview": "梳理创作目标、受众和叙事主线。",
+      "contentFile": "/prompt-library/content/templates.json"
+    }
+  ],
+  "stats": {
+    "packages": 0,
+    "relatedPlugins": 0,
+    "documents": 0,
+    "templates": 12
+  }
+}

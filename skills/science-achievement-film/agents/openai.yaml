@@ -1,4 +1,4 @@
 interface:
   display_name: "影序"
   short_description: "从权威资料、旁白和素材墙到生成、后期、审核与安全归档"
-  default_prompt: "使用 $science-achievement-film 打开影序动态首页。我会从首页进入素材墙，再按本次要求制作或修改视频。"
+  default_prompt: "使用 $science-achievement-film 打开影序开源工作台的动态首页，再按本次要求创建、剪辑或导出视频。"

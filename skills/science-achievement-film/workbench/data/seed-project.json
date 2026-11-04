@@ -1,0 +1,244 @@
+{
+  "id": "project-demo",
+  "name": "山海之间",
+  "brief": "一支关于自然、生命与时间的短片。以群山开场，让潮汐接续呼吸，在微观与宏观之间找到叙事的节奏。",
+  "mode": "manual",
+  "aspect": "16:9",
+  "fps": 25,
+  "target": 24,
+  "style": "自然纪录片",
+  "revision": 0,
+  "updated": "2026-11-03T05:38:04.097Z",
+  "assets": [
+    {
+      "id": "mountain-still",
+      "name": "雪山的第一束光.webp",
+      "kind": "image",
+      "url": "/cover/mountain.webp",
+      "duration": 0,
+      "width": 1672,
+      "height": 941,
+      "origin": "demo",
+      "note": "图序自产虚构视觉素材 · 原型示例"
+    },
+    {
+      "id": "ocean-motion",
+      "name": "潮汐与呼吸.mp4",
+      "kind": "video",
+      "url": "/cover/ocean.mp4",
+      "poster": "/cover/ocean.webp",
+      "duration": 4.541667,
+      "width": 1280,
+      "height": 720,
+      "origin": "demo",
+      "note": "图序自产循环短片 · 原型示例"
+    },
+    {
+      "id": "ocean-still",
+      "name": "海面的留白.webp",
+      "kind": "image",
+      "url": "/cover/ocean.webp",
+      "duration": 0,
+      "width": 1672,
+      "height": 941,
+      "origin": "demo",
+      "note": "图序自产虚构视觉素材 · 原型示例"
+    },
+    {
+      "id": "dna-motion",
+      "name": "生命的微观秩序.mp4",
+      "kind": "video",
+      "url": "/cover/dna.mp4",
+      "poster": "/cover/dna.webp",
+      "duration": 4.541667,
+      "width": 1280,
+      "height": 720,
+      "origin": "demo",
+      "note": "图序自产循环短片 · 原型示例"
+    },
+    {
+      "id": "dna-still",
+      "name": "微观结构.webp",
+      "kind": "image",
+      "url": "/cover/dna.webp",
+      "duration": 0,
+      "width": 1672,
+      "height": 941,
+      "origin": "demo",
+      "note": "图序自产虚构视觉素材，不作科学证据"
+    },
+    {
+      "id": "studio-tone",
+      "name": "低音量和弦试音.wav",
+      "kind": "audio",
+      "url": "/cover/studio-tone.wav",
+      "duration": 16,
+      "origin": "demo",
+      "note": "程序合成测试音 · 非配乐质量样本"
+    }
+  ],
+  "tracks": [
+    {
+      "id": "T1",
+      "name": "字幕与标题",
+      "kind": "title",
+      "color": "ochre",
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "V2",
+      "name": "叠加画面",
+      "kind": "video",
+      "color": "violet",
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "V1",
+      "name": "主画面",
+      "kind": "video",
+      "color": "sage",
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "A1",
+      "name": "旁白",
+      "kind": "audio",
+      "color": "clay",
+      "muted": false,
+      "locked": false
+    },
+    {
+      "id": "A2",
+      "name": "音乐与音效",
+      "kind": "audio",
+      "color": "blue",
+      "muted": false,
+      "locked": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "shot-01",
+      "track": "V1",
+      "asset": "mountain-still",
+      "name": "雪山 · 序章",
+      "start": 0,
+      "length": 6,
+      "sourceIn": 0,
+      "volume": 1,
+      "opacity": 1,
+      "scale": 1
+    },
+    {
+      "id": "shot-02",
+      "track": "V1",
+      "asset": "ocean-motion",
+      "name": "潮汐 · 呼吸",
+      "start": 6,
+      "length": 4,
+      "sourceIn": 0,
+      "volume": 1,
+      "opacity": 1,
+      "scale": 1
+    },
+    {
+      "id": "shot-03",
+      "track": "V1",
+      "asset": "ocean-still",
+      "name": "海面 · 留白",
+      "start": 10,
+      "length": 6,
+      "sourceIn": 0,
+      "volume": 1,
+      "opacity": 1,
+      "scale": 1
+    },
+    {
+      "id": "shot-04",
+      "track": "V1",
+      "asset": "dna-motion",
+      "name": "生命 · 微观",
+      "start": 16,
+      "length": 4,
+      "sourceIn": 0,
+      "volume": 1,
+      "opacity": 1,
+      "scale": 1
+    },
+    {
+      "id": "shot-05",
+      "track": "V1",
+      "asset": "mountain-still",
+      "name": "群山 · 尾声",
+      "start": 20,
+      "length": 4,
+      "sourceIn": 0,
+      "volume": 1,
+      "opacity": 1,
+      "scale": 1
+    },
+    {
+      "id": "overlay-01",
+      "track": "V2",
+      "asset": "dna-still",
+      "name": "结构叠加",
+      "start": 12,
+      "length": 4,
+      "sourceIn": 0,
+      "volume": 1,
+      "opacity": 0.85,
+      "scale": 0.4
+    },
+    {
+      "id": "title-01",
+      "track": "T1",
+      "name": "片名",
+      "start": 0,
+      "length": 4,
+      "sourceIn": 0,
+      "volume": 1,
+      "opacity": 1,
+      "scale": 1,
+      "text": "山 海 之 间"
+    },
+    {
+      "id": "title-02",
+      "track": "T1",
+      "name": "章节字幕",
+      "start": 8,
+      "length": 4,
+      "sourceIn": 0,
+      "volume": 1,
+      "opacity": 1,
+      "scale": 1,
+      "text": "万物，自有节奏。"
+    },
+    {
+      "id": "title-03",
+      "track": "T1",
+      "name": "尾声",
+      "start": 20,
+      "length": 4,
+      "sourceIn": 0,
+      "volume": 1,
+      "opacity": 1,
+      "scale": 1,
+      "text": "让故事，连接脉动。"
+    },
+    {
+      "id": "music-01",
+      "track": "A2",
+      "asset": "studio-tone",
+      "name": "低音量和弦试音",
+      "start": 0,
+      "length": 16,
+      "sourceIn": 0,
+      "volume": 0.28,
+      "opacity": 1,
+      "scale": 1
+    }
+  ]
+}

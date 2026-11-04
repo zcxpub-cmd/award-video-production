@@ -8,13 +8,31 @@
 
 [开源版使用说明书](docs/使用说明书.md) · [逐项功能说明](docs/features.md) · [快速上手](skills/science-achievement-film/references/quickstart.md) · [能力与边界](skills/science-achievement-film/references/capabilities.md) · [验证范围](skills/science-achievement-film/references/verification.md)
 
-[下载 v1.3.0 源码 ZIP](https://github.com/zcxpub-cmd/award-video-production/releases/download/v1.3.0/award-video-production-v1.3.0.zip) · [发布说明与校验文件](https://github.com/zcxpub-cmd/award-video-production/releases/tag/v1.3.0)。解压后双击 `打开影序.html`。全屏首页每次随机取一景，18 景在同一轮中不重复。已有素材墙时可用 `agent_tools.py launch` 启动，从首页点「进入素材墙」。[画面来源](docs/home-cover-assets.md)
+[下载 v1.4.0 开源工作台 ZIP](https://github.com/zcxpub-cmd/award-video-production/releases/download/v1.4.0/award-video-production-v1.4.0.zip) · [安装与使用说明](docs/使用说明书.md)
+
+1. 安装 Python 3.10 或更新版本，然后解压 Release 附件中的发行 ZIP。
+2. macOS 双击 `启动影序.command`，Windows 双击 `start-yingxu.bat`，Linux 运行 `sh start-yingxu.sh`。首次联网准备本机依赖，随后自动打开动态首页。
+3. 点「开始创作」，填写项目名，选择「人工设置」或「一键成片」。从素材库导入文件，再在「时间线剪辑」编辑。成片和工程包在「导出与检查」下载。
+
+工作台提供 12 份可填变量的原创提示词模板、四个内置制作角色及手动多轨编辑。需要 AI 剪辑、画面观察或导演编排时，在「偏好与配置」连接自己的本机 Ollama。技术审核与手动制作可独立运行。
+
+已有命令行素材审核墙可继续用 `agent_tools.py launch` 打开。能启动本地进程的智能体可以用 `agent_tools.py studio` 启动完整工作台。双击 `打开影序.html` 可离线查看 18 景动态封面与安装说明。[画面来源](docs/home-cover-assets.md)
 
 ## 功能实拍
 
-以下是开源版用虚构工程运行得到的浏览器界面、命令输出和成片画面。工作台实拍包含暗黑与暖白两套主题。[完整截图索引](docs/screenshots/README.md)
+以下是开源工作台用公开演示媒体的实测截图。[完整截图索引](docs/screenshots/README.md)
 
-![开源版动态首页的抽景画面及进入素材墙按钮](docs/screenshots/25-fullscreen-home.jpg)
+![开源工作台动态首页](docs/screenshots/29-community-home.jpg)
+
+![新建工程，可选人工设置和一键成片](docs/screenshots/30-community-new-project.jpg)
+
+![五轨时间线及红框标出的 AI 剪辑建议](docs/screenshots/32-community-timeline-agent.jpg)
+
+![可填写变量的原创提示词模板](docs/screenshots/31-community-prompt-template.jpg)
+
+![实际成片导出和技术检查](docs/screenshots/33-community-export.jpg)
+
+以下为兼容的命令行工具与独立素材审核墙。
 
 ### 素材墙与审核
 
@@ -112,7 +130,7 @@
 ## 安装与调用
 
 支持本地进程的智能体宿主可以使用 JSON 工具入口，见[智能体接入说明](docs/agent-integration.md)。
-[v1.3.0 发布说明](docs/release-v1.3.0.md)记录全屏首页与工作台界面更新。相比 v1.0.0 的上一版变更见 [v1.1.0 发布说明](docs/release-v1.1.0.md)。
+[v1.4.0 发布说明](docs/release-v1.4.0.md)记录可安装的开源工作台与内置智能体。相比 v1.0.0 的上一版变更见 [v1.1.0 发布说明](docs/release-v1.1.0.md)。
 
 ### Codex 插件
 
@@ -162,7 +180,7 @@ python3 scripts/demo_project.py --output /path/to/new-demo --ffmpeg /path/to/ful
 python3 -m unittest discover -s skills/science-achievement-film/tests -v
 python3 skills/science-achievement-film/tests/regression_filmkit.py
 python3 skills/science-achievement-film/scripts/public_release.py scan .
-python3 skills/science-achievement-film/scripts/public_release.py build . --out ../award-video-production-v1.3.0.zip
+python3 skills/science-achievement-film/scripts/public_release.py build . --out ../award-video-production-v1.4.0.zip
 ```
 
 媒体回归需要支持相关过滤器的 FFmpeg；可通过 `MEDIA_TEST_FFMPEG` / `MEDIA_TEST_FFPROBE` 指定。测试使用临时合成素材，外部服务使用离线模拟；未运行付费模型或用户工程。发布工具只打包公开白名单，排除git历史、私有配置、制作输出和报告。隐私扫描是辅助，发布前仍应人工检查内容与许可证。

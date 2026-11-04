@@ -4,6 +4,11 @@
 
 | 截图 | 展示内容 |
 |---|---|
+| [开源工作台首页](29-community-home.jpg) | 从发行 ZIP 启动后的动态封面 |
+| [新建工程](30-community-new-project.jpg) | 实际建项，支持人工设置和一键成片 |
+| [原创提示词模板](31-community-prompt-template.jpg) | 填变量并放入剪辑对话 |
+| [多轨编辑与 AI](32-community-timeline-agent.jpg) | 红框标出本地模型建议及应用入口 |
+| [成片导出](33-community-export.jpg) | 实测导出和成片预览 |
 | [全屏动态首页](25-fullscreen-home.jpg) | 全幅背景视频和进入素材墙入口 |
 | [暗黑素材库](26-workbench-assets-dark.jpg) | 新版工作台导航、审核统计和素材卡片 |
 | [暖白素材库](27-workbench-assets-light.jpg) | 切换到暖白后的同一工作台 |

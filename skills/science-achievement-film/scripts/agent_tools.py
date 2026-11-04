@@ -61,6 +61,10 @@ def invoke(name, arguments):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
+    if (argv := sys.argv[1:]) and argv[0] == 'studio':
+        launcher = Path(__file__).resolve().parents[1] / 'workbench/launch.py'
+        return subprocess.call([sys.executable, str(launcher), *argv[1:]])
+    commands.add_parser("studio", help="Install and launch the interactive Yingxu workbench")
     commands.add_parser("list", help="Print the available tools and input schemas")
     call = commands.add_parser("invoke", help="Read one JSON argument object from stdin")
     call.add_argument("tool", choices=TOOLS)

@@ -7,12 +7,13 @@ Reports use relative paths and rule names, never matched secret values.
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import sys
 import zipfile
 
-TEXT_EXT={'.py','.md','.json','.yaml','.yml','.toml','.txt','.csv','.js','.css','.html','.xml','.gitignore'}
+TEXT_EXT={'.py','.md','.json','.yaml','.yml','.toml','.txt','.csv','.js','.css','.html','.xml','.ts','.tsx','.gitignore','.command','.sh','.bat','.svg'}
 RULES={
     'personal_unix_home':re.compile(r'/(?:Users|home)/[A-Za-z0-9][A-Za-z0-9_.-]*/'),
     'personal_windows_home':re.compile(r'[A-Za-z]:[\\/]Users[\\/][A-Za-z0-9_.-]+[\\/]'),
@@ -27,9 +28,11 @@ DENY_NAMES={'.env','.DS_Store','config.toml','auth.json','reviews.json','media-m
 PRIVATE_PARTS={'local','.local','private','.private','private-config','local-config'}
 PRIVATE_FILES={'local-runtime.md','local-manifest.json','runtime-config.json'}
 IMAGE_EXT={'.png','.jpg','.jpeg'}
-PUBLIC_PATHS = ('README.md', '打开影序.html', 'LICENSE', 'NOTICE.md', '.gitignore', 'edition.json',
+PUBLIC_PATHS = ('README.md', '打开影序.html', '启动影序.command', 'start-yingxu.sh', 'start-yingxu.bat', 'LICENSE', 'NOTICE.md', '.gitignore', 'edition.json',
                 '.codex-plugin', '.agents', 'skills', 'docs')
 COVER = Path('skills/science-achievement-film/assets/wall/cover')
+SYNTHETIC_TONE = Path('skills/science-achievement-film/workbench/data/studio-tone.wav')
+TONE_SHA256 = '3f63d476d22afac66f1101cab81d644eec44ca9b593ae433575e5f93c283f7af'
 
 
 def cover_hashes(root):
@@ -75,9 +78,15 @@ def file_list(root):
         selected = root / relative
         if selected.is_symlink():raise ValueError('Symlink is not allowed in a public release: '+str(selected.relative_to(root)))
         if not selected.exists():continue
-        for p in ([selected] if selected.is_file() else sorted(selected.rglob('*'))):
-            if p.is_symlink():raise ValueError('Symlink is not allowed in a public release: '+str(p.relative_to(root)))
-            if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.pyc':files.append(p)
+        if selected.is_file():
+            files.append(selected)
+            continue
+        for folder, directories, filenames in os.walk(selected):
+            directories[:] = sorted(d for d in directories if d not in {'node_modules', '__pycache__'})
+            for name in [*directories, *sorted(filenames)]:
+                p = Path(folder) / name
+                if p.is_symlink():raise ValueError('Symlink is not allowed in a public release: '+str(p.relative_to(root)))
+                if p.is_file() and p.suffix not in {'.pyc', '.tsbuildinfo'}:files.append(p)
     return sorted(set(files))
 
 
@@ -92,6 +101,10 @@ def scan(root,deny_terms=()):
         findings.append({'path':'edition.json','line':None,'rule':'not_publishable_edition'})
     for p in files:
         relative=p.relative_to(root);rel=str(relative)
+        if relative == SYNTHETIC_TONE:
+            if hashlib.sha256(p.read_bytes()).hexdigest() != TONE_SHA256:
+                findings.append({'path':rel,'line':None,'rule':'synthetic_tone_hash_mismatch'})
+            continue
         if relative in cover:
             if hashlib.sha256(p.read_bytes()).hexdigest() != cover[relative]:
                 findings.append({'path':rel,'line':None,'rule':'cover_asset_hash_mismatch'})

@@ -2,6 +2,8 @@
 
 能启动本地进程的宿主可以通过命令行调用本项目。Codex 可以继续使用原有插件或 Skill。其他宿主可将以下 JSON 入口注册为工具。宿主负责管理进程权限，并决定智能体可以读取哪些项目路径。
 
+要使用完整工作台，在仓库根目录运行 `python3 skills/science-achievement-film/scripts/agent_tools.py studio`。它从动态首页启动，支持创建工程、导入、多轨剪辑、模板和导出。内置角色通过本机 Ollama 执行模型任务。下文的通用 JSON 工具仍可独立注册到其他智能体宿主。
+
 用户要求打开工作台时，从仓库根目录运行 `python3 skills/science-achievement-film/scripts/agent_tools.py launch "素材墙目录"`。保持进程运行，默认浏览器会打开动态首页，用户再点「进入素材墙」。无界面环境可以加 `--no-open`，将打印的首页 URL 交给用户。Windows PowerShell 可将 `python3` 替换为 `py -3`。
 
 在解压后的仓库根目录运行：

@@ -45,6 +45,7 @@
       <section data-page="projects" hidden>
         <div class="hero"><div><p class="eyebrow">YOUR CREATIVE SPACE / 项目工作台</p><h1>让下一个故事，从这里开始。</h1><p class="intro">从项目计划进入文稿与素材，或用内置演示完整走一遍。命令从开源包的技能目录运行。</p></div></div>
         <div class="workflow-grid">
+          <article class="workflow-card"><h2>新建剪辑工程</h2><p>通过解压包中的启动器打开完整工作台，再选择「新建项目」。</p><a class="button secondary" href="http://127.0.0.1:8790/#studio">打开已启动的工作台</a></article>
           <article class="workflow-card"><h2>完整演示</h2><p>用程序生成的素材演示文稿、审核、剪辑、检查和归档。</p>
           <pre><code>python3 scripts/demo_project.py --output ../../../yingxu-demo</code></pre><button type="button" class="button secondary copy-command">复制命令</button>
           <a class="button secondary" href="#assets">返回当前素材库</a></article>
@@ -58,6 +59,7 @@
       <section data-page="editor" hidden>
         <div class="hero"><div><p class="eyebrow">TIMELINE / 时间线剪辑</p><h1>让每个镜头，落到正确的位置。</h1><p class="intro">开源工作流通过剪辑配方定义片段、旁白、字幕和章节，再由 FFmpeg 渲染。</p></div></div>
         <div class="workflow-grid">
+          <article class="workflow-card"><h2>多轨时间线编辑器</h2><p>完整工作台启动后，可在时间线编辑器中加入素材、调整片段并导出成片。</p><a class="button secondary" href="http://127.0.0.1:8790/#editor">打开已启动的时间线</a></article>
           <article class="workflow-card"><h2>画面编排</h2><p>按源内范围、时长和章节编排镜头。编辑 JSON 配方后运行渲染。</p>
           <pre><code>python3 scripts/media_tools.py render edit.json --output film-v1</code></pre><button type="button" class="button secondary copy-command">复制命令</button>
           <a class="button secondary" href="https://github.com/zcxpub-cmd/award-video-production/blob/main/skills/science-achievement-film/assets/edit-recipe.example.json">查看剪辑配方</a></article>
