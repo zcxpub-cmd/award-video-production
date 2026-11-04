@@ -8,7 +8,7 @@
 
 [开源版使用说明书](docs/使用说明书.md) · [逐项功能说明](docs/features.md) · [快速上手](skills/science-achievement-film/references/quickstart.md) · [能力与边界](skills/science-achievement-film/references/capabilities.md) · [验证范围](skills/science-achievement-film/references/verification.md)
 
-[下载 v1.4.0 开源工作台 ZIP](https://github.com/zcxpub-cmd/award-video-production/releases/download/v1.4.0/award-video-production-v1.4.0.zip) · [安装与使用说明](docs/使用说明书.md)
+[下载 v1.4.0 开源工作台 ZIP](https://github.com/zcxpub-cmd/award-video-production/releases/download/v1.4.0/award-video-production-v1.4.0.zip) · [下载 v1.4.0 图文使用手册（PDF）](https://github.com/zcxpub-cmd/award-video-production/releases/download/v1.4.0/yingxu-v1.4.0-user-guide-zh-CN.pdf) · [安装与使用说明](docs/使用说明书.md)
 
 1. 安装 Python 3.10 或更新版本，然后解压 Release 附件中的发行 ZIP。
 2. macOS 双击 `启动影序.command`，Windows 双击 `start-yingxu.bat`，Linux 运行 `sh start-yingxu.sh`。首次联网准备本机依赖，随后自动打开动态首页。
