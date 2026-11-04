@@ -144,7 +144,9 @@ async function init() {
   if (location.protocol === 'file:') throw new Error('请通过本机服务打开素材墙：\npython3 <插件目录>/scripts/material_wall.py serve "<此素材墙目录>" --port 8765\n然后打开 http://127.0.0.1:8765/ 。直接双击 HTML 无法保存审核或提供视频 Range 播放。');
   const results = await Promise.all([request('/api/assets'), request('/api/reviews'), request('/api/session')]);
   [manifest, reviews] = results; token = results[2].csrf_token;
-  document.title = `${manifest.title} · 素材墙`; $('wall-title').textContent = manifest.title;
+  $('wall-title').textContent = manifest.title;
+  $('current-project').textContent = manifest.title;
+  showWorkspacePage();
   $('startup').textContent = (manifest.warnings || []).join('\n'); $('startup').hidden = !(manifest.warnings || []).length;
   choiceOptions('chapter', manifest.assets.map(a => a.chapter_id)); choiceOptions('origin', manifest.assets.map(a => a.origin));
   ['search','chapter','origin','review'].forEach(id => $(id).addEventListener(id === 'search' ? 'input' : 'change', render));
@@ -158,3 +160,84 @@ async function init() {
   render();
 }
 init().catch(error => { $('startup').hidden = false; $('startup').classList.add('error'); $('startup').textContent = `素材墙尚未就绪\n${error.message}`; });
+
+const routes = new Map(Array.from(document.querySelectorAll('[data-route]'), link => [link.dataset.route, link]));
+const panels = Array.from(document.querySelectorAll('[data-page]'));
+const themeKey = 'yingxu.community.theme';
+let toastTimeout;
+let theme = 'dark';
+
+function setNavigation(open) {
+  document.querySelector('.shell').toggleAttribute('data-nav-open', open);
+  $('nav-toggle').setAttribute('aria-expanded', String(open));
+}
+
+function showWorkspacePage() {
+  const requested = location.hash.slice(1);
+  const route = routes.has(requested) ? requested : 'assets';
+  const label = routes.get(route).textContent.trim();
+  for (const [name, link] of routes) {
+    if (name === route) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  }
+  for (const panel of panels) panel.hidden = panel.dataset.page !== route;
+  $('workspace-page').textContent = label;
+  document.title = `${manifest?.title || '影序'} · ${label}`;
+  setNavigation(false);
+}
+
+function setTheme(next) {
+  theme = next === 'light' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = theme;
+  $('theme-toggle').textContent = theme === 'light' ? '暖白' : '暗黑';
+  $('theme-toggle').setAttribute('aria-label', `当前主题为${$('theme-toggle').textContent}，点击切换`);
+  document.querySelectorAll('[data-theme-choice]').forEach(button => {
+    button.setAttribute('aria-pressed', String(button.dataset.themeChoice === theme));
+  });
+  try { localStorage.setItem(themeKey, theme); } catch {}
+}
+
+function notify(message) {
+  clearTimeout(toastTimeout);
+  const toast = $('workspace-toast');
+  toast.textContent = message;
+  toast.hidden = false;
+  toastTimeout = setTimeout(() => { toast.hidden = true; }, 3800);
+}
+
+try { theme = localStorage.getItem(themeKey) || theme; } catch {}
+setTheme(theme);
+showWorkspacePage();
+window.addEventListener('hashchange', () => {
+  showWorkspacePage();
+  $('workspace-body').scrollIntoView({block: 'start'});
+});
+$('nav-toggle').addEventListener('click', () => {
+  setNavigation($('nav-toggle').getAttribute('aria-expanded') !== 'true');
+});
+window.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && $('nav-toggle').getAttribute('aria-expanded') === 'true') {
+    setNavigation(false);
+    $('nav-toggle').focus();
+  }
+});
+$('theme-toggle').addEventListener('click', () => setTheme(theme === 'dark' ? 'light' : 'dark'));
+document.querySelectorAll('[data-theme-choice]').forEach(button => {
+  button.addEventListener('click', () => setTheme(button.dataset.themeChoice));
+});
+document.querySelectorAll('.copy-command').forEach(button => {
+  button.addEventListener('click', async () => {
+    const command = button.closest('.workflow-card').querySelector('code');
+    try {
+      await navigator.clipboard.writeText(command.textContent);
+      notify('已复制命令');
+    } catch {
+      const range = document.createRange();
+      range.selectNodeContents(command);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      notify('已选中命令，可以手动复制');
+    }
+  });
+});

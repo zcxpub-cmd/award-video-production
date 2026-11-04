@@ -9,44 +9,46 @@
   <script src="./home.js" defer></script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="brand">
-      <svg aria-hidden="true" viewBox="0 0 48 48" width="38" height="38">
-        <rect width="48" height="48" rx="13" fill="#d87049"/>
-        <path d="M13 12v24M23 12v24M33 12v24M13 15l20 12M13 26l20 11" fill="none" stroke="#fff9ec" stroke-width="2.7" stroke-linecap="round"/>
-      </svg>
-      <span>影序 <small>YINGXU</small></span>
-    </div>
-    <span class="edition">开源版</span>
-  </header>
   <main>
-    <section class="hero" aria-labelledby="headline">
-      <div class="hero-copy">
-        <p class="eyebrow">YINGXU / VIDEO PRODUCTION TOOLKIT</p>
-        <h1 id="headline">让故事，<br><span>连接脉动。</span></h1>
-        <p class="intro">从文稿和分镜开始，整理素材、审看镜头，再交给剪辑和交付。</p>
-        <div class="actions">
-          <a class="primary" id="enter-wall" href="#quick-start">开始使用 <span aria-hidden="true">↗</span></a>
-          <a class="secondary" href="#quick-start">查看启动方式</a>
+    <section class="home" aria-labelledby="headline">
+      <img id="scene-poster" class="home-still" alt="" hidden>
+      <video id="scene-video" class="home-film" muted playsinline loop preload="none" aria-hidden="true" hidden></video>
+      <div class="home-shade" aria-hidden="true"></div>
+      <div class="home-grain" aria-hidden="true"></div>
+      <nav class="home-nav" aria-label="首页导航">
+        <span class="brand">
+          <span class="brand-symbol"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 5v22M16 5v22M24 5v22M8 8l16 9M8 17l16 9"/></svg></span>
+          <span>影序<small>YINGXU</small></span>
+        </span>
+        <div>
+          <a href="#quick-start">使用指南</a>
           <button type="button" id="motion-toggle" aria-pressed="false" hidden>暂停动效</button>
+          <span class="home-badge">开源版</span>
         </div>
+        <a class="home-nav-cta" data-wall-entry href="#quick-start">素材工作台 <span aria-hidden="true">↗</span></a>
+      </nav>
+      <div class="home-copy">
+        <div class="home-kicker"><span></span> A SPACE FOR YOUR NEXT STORY</div>
+        <h1 id="headline">让故事，<br>连接<span>脉动。</span></h1>
+        <p>从一份素材，到一个值得讲述的故事。<br>整理素材、审看镜头，把每一次选择留给你。</p>
+        <div class="home-actions">
+          <a class="primary" id="enter-wall" data-wall-entry href="#quick-start">开始使用 <span aria-hidden="true">→</span></a>
+          <a class="secondary" href="#quick-start"><span aria-hidden="true">▷</span> 查看启动方式</a>
+        </div>
+        <div class="home-principles"><span>本地素材</span><i></i><span>镜头审核</span><i></i><span>自由掌控</span></div>
       </div>
-      <div class="visual">
-        <img id="scene-poster" alt="" hidden>
-        <video id="scene-video" muted playsinline loop preload="none" aria-hidden="true" hidden></video>
-        <span id="scene-name" class="scene-name"></span>
-      </div>
+      <div class="home-film-note"><span class="frame-corner"></span><div><small>THE OPENING FRAME</small><p>故事，始于看见。</p></div><span class="home-time" id="scene-name"></span></div>
+      <footer class="home-footer"><span>素材 <i>／</i> 叙事 <i>／</i> 成片</span><div><span class="status-dot"></span> YOUR STORY, YOUR RHYTHM</div><a data-wall-entry href="#quick-start">进入工作台 <span aria-hidden="true">→</span></a></footer>
     </section>
     <section class="quick-start" id="quick-start" aria-labelledby="quick-title">
       <p class="eyebrow">QUICK START</p>
       <h2 id="quick-title">启动素材工作台</h2>
       <p>在下载包根目录打开终端。先运行内置演示，生成一份新的本地素材墙。需要 Python 3.10+、支持字幕滤镜的 FFmpeg 和 FFprobe。</p>
       <pre><code>python3 skills/science-achievement-film/scripts/demo_project.py --output "../yingxu-demo"
-python3 skills/science-achievement-film/scripts/material_wall.py serve "../yingxu-demo/wall" --port 8765 --open</code></pre>
+python3 skills/science-achievement-film/scripts/agent_tools.py launch "../yingxu-demo/wall" --port 8765</code></pre>
       <p>Windows 可将 <code>python3</code> 替换成 <code>py -3</code>。成片字幕需要指定本机已安装的中文字体，例如在第一条命令加上 <code>--font "Noto Sans CJK SC"</code>。服务会先打开影序首页。也可以打开 <a href="http://127.0.0.1:8765/">127.0.0.1:8765</a>。</p>
       <p>已有素材墙时，可直接把第二条命令中的目录换成现有素材墙目录。</p>
     </section>
   </main>
-  <footer>素材 / 叙事 / 成片</footer>
 </body>
 </html>

@@ -40,7 +40,7 @@ HOME_STATIC = {
     "/cover-scenes.js": ("cover-scenes.js", "text/javascript; charset=utf-8"),
 }
 WALL_STATIC = {
-    "/wall.html": ("wall.html", "text/html; charset=utf-8"),
+    "/wall.html": ("index.html", "text/html; charset=utf-8"),
     "/app.js": ("app.js", "text/javascript; charset=utf-8"),
     "/style.css": ("style.css", "text/css; charset=utf-8"),
 }
@@ -465,12 +465,7 @@ class WallHandler(BaseHTTPRequestHandler):
                     self.stream_media(handle, path.stat().st_size, MIME[path.suffix])
             elif route in WALL_STATIC:
                 filename, mime = WALL_STATIC[route]
-                path = self.state.root / filename
-                if filename == "wall.html" and not path.exists() and not path.is_symlink():
-                    path = self.state.root / "index.html"  # Wall directories built before the homepage.
-                if path.is_symlink():
-                    raise ValueError("页面文件不能是符号链接")
-                self.reply(200, path.read_bytes(), mime)
+                self.reply(200, (TEMPLATES / filename).read_bytes(), mime)
             elif route == "/api/session":
                 self.reply(200, {"csrf_token": self.state.token})
             elif route == "/api/assets":

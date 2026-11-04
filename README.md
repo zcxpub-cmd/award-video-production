@@ -8,24 +8,28 @@
 
 [开源版使用说明书](docs/使用说明书.md) · [逐项功能说明](docs/features.md) · [快速上手](skills/science-achievement-film/references/quickstart.md) · [能力与边界](skills/science-achievement-film/references/capabilities.md) · [验证范围](skills/science-achievement-film/references/verification.md)
 
-[下载 v1.2.0 源码 ZIP](https://github.com/zcxpub-cmd/award-video-production/releases/download/v1.2.0/award-video-production-v1.2.0.zip) · [发布说明与校验文件](https://github.com/zcxpub-cmd/award-video-production/releases/tag/v1.2.0)。解压后双击 `打开影序.html`。首页每次随机取一景，18 景在同一轮中不重复。已有素材墙时可用 `agent_tools.py launch` 启动，从首页点「进入素材墙」。[画面来源](docs/home-cover-assets.md)
+[下载 v1.3.0 源码 ZIP](https://github.com/zcxpub-cmd/award-video-production/releases/download/v1.3.0/award-video-production-v1.3.0.zip) · [发布说明与校验文件](https://github.com/zcxpub-cmd/award-video-production/releases/tag/v1.3.0)。解压后双击 `打开影序.html`。全屏首页每次随机取一景，18 景在同一轮中不重复。已有素材墙时可用 `agent_tools.py launch` 启动，从首页点「进入素材墙」。[画面来源](docs/home-cover-assets.md)
 
 ## 功能实拍
 
-以下是开源版用虚构工程运行得到的浏览器界面、命令输出和成片画面。素材墙实拍来自当前主分支的暗黑配色。[完整截图索引](docs/screenshots/README.md)
+以下是开源版用虚构工程运行得到的浏览器界面、命令输出和成片画面。工作台实拍包含暗黑与暖白两套主题。[完整截图索引](docs/screenshots/README.md)
 
-![开源版动态首页的抽景画面及进入素材墙按钮](docs/screenshots/23-open-source-scenes.jpg)
+![开源版动态首页的抽景画面及进入素材墙按钮](docs/screenshots/25-fullscreen-home.jpg)
 
 ### 素材墙与审核
 
 在一屏看素材来源、对应句子、用途和审核进度。打开卡片可播放视频并查看源内范围。
 
-![素材墙总览，展示六份合成素材及审核统计](docs/screenshots/07-wall-overview-dark.jpg)
+![新版素材库，展示暗黑主题和统一导航](docs/screenshots/26-workbench-assets-dark.jpg)
 
-![播放视频候选，查看源内范围、分辨率和叙事用途](docs/screenshots/09-wall-playback-dark.jpg)
+![新版素材库，展示暖白主题](docs/screenshots/27-workbench-assets-light.jpg)
 
 <details>
-<summary>查看组合筛选、审核保存和 JSON / CSV 导出</summary>
+<summary>查看素材审核流程图示</summary>
+
+以下流程图来自上一版素材墙，审核、筛选和导出操作继续可用。
+
+![播放视频候选，查看源内范围、分辨率和叙事用途](docs/screenshots/09-wall-playback-dark.jpg)
 
 ![使用关键词、章节、来源和审核状态定位候选](docs/screenshots/08-wall-filter-dark.jpg)
 
@@ -38,6 +42,8 @@
 ### 智能体接入
 
 能启动本地进程的宿主可以发现工具，传入 JSON 参数，再读取素材盘点、工程检查和媒体参数。红框标出实际调用入口与返回字段。[智能体接入说明](docs/agent-integration.md)
+
+![红框标出智能体工作台的启动入口](docs/screenshots/28-workbench-agent-launch.jpg)
 
 ![红框标出工具发现命令、工具名称和参数结构](docs/screenshots/12-agent-discovery.jpg)
 
@@ -106,7 +112,7 @@
 ## 安装与调用
 
 支持本地进程的智能体宿主可以使用 JSON 工具入口，见[智能体接入说明](docs/agent-integration.md)。
-[v1.2.0 发布说明](docs/release-v1.2.0.md)记录本次首页和启动改动。相比 v1.0.0 的上一版变更见 [v1.1.0 发布说明](docs/release-v1.1.0.md)。
+[v1.3.0 发布说明](docs/release-v1.3.0.md)记录全屏首页与工作台界面更新。相比 v1.0.0 的上一版变更见 [v1.1.0 发布说明](docs/release-v1.1.0.md)。
 
 ### Codex 插件
 
@@ -156,7 +162,7 @@ python3 scripts/demo_project.py --output /path/to/new-demo --ffmpeg /path/to/ful
 python3 -m unittest discover -s skills/science-achievement-film/tests -v
 python3 skills/science-achievement-film/tests/regression_filmkit.py
 python3 skills/science-achievement-film/scripts/public_release.py scan .
-python3 skills/science-achievement-film/scripts/public_release.py build . --out ../award-video-production-v1.2.0.zip
+python3 skills/science-achievement-film/scripts/public_release.py build . --out ../award-video-production-v1.3.0.zip
 ```
 
 媒体回归需要支持相关过滤器的 FFmpeg；可通过 `MEDIA_TEST_FFMPEG` / `MEDIA_TEST_FFPROBE` 指定。测试使用临时合成素材，外部服务使用离线模拟；未运行付费模型或用户工程。发布工具只打包公开白名单，排除git历史、私有配置、制作输出和报告。隐私扫描是辅助，发布前仍应人工检查内容与许可证。

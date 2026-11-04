@@ -2,7 +2,9 @@
 
 const enter = document.getElementById('enter-wall');
 if (window.location.protocol !== 'file:') {
-  enter.href = './wall.html';
+  document.querySelectorAll('[data-wall-entry]').forEach(link => {
+    link.href = './wall.html';
+  });
   enter.firstChild.textContent = '进入素材墙 ';
 }
 

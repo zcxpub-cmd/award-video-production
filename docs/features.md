@@ -1,6 +1,6 @@
 # 功能说明与操作示例
 
-本页对应公开版 **v1.2.0**。各模块可以独立运行，也可以按下述顺序连接。通用智能体工具提供素材盘点、工程检查和媒体探测。[智能体接入](agent-integration.md) · [功能实拍](screenshots/README.md)
+本页对应公开版 **v1.3.0**。各模块可以独立运行，也可以按下述顺序连接。通用智能体工具提供素材盘点、工程检查和媒体探测。[智能体接入](agent-integration.md) · [功能实拍](screenshots/README.md)
 
 所有命令默认在 `skills/science-achievement-film/` 目录执行。`/path/to/project` 是使用者自行选择的新项目目录，不是预置目录。输出一般要求新文件或新目录，以免覆盖已经确认的版本。模板中的文案、素材路径与测量值应替换为本项目真实内容。
 
@@ -78,7 +78,7 @@ python3 scripts/content_tools.py handoff /path/to/project/manuscript.json /path/
 
 用卡片查看缩略图、章节、来源、句子编号、用途与备注。顶部统计通过、待审、弃用和审核进度。只有清单明确指定 `local_codex_generated=true` 才显示“AI · 本机 Codex 生成”。示例中的标记仅演示本工作流主动制作的程序动画，不代表调用了某个生成模型。
 
-![素材墙总览，展示卡片、章节、来源、用途和进度](screenshots/07-wall-overview-dark.jpg)
+![素材墙总览，展示卡片、章节、来源、用途和进度](screenshots/26-workbench-assets-dark.jpg)
 
 ### 5.2 组合筛选与搜索
 

@@ -3,24 +3,119 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark">
+  <meta name="color-scheme" content="dark light">
   <title>影序 · 素材墙</title>
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
 </head>
 <body>
   <div class="shell">
-    <header class="masthead"><a class="brand" href="./index.html" aria-label="返回影序首页"><span class="brand-mark">◈</span><span>影序 <small>素材工作台</small></span></a><span class="local-pill"><i></i> 本机审核 · 独立保存</span></header>
-    <main>
-      <section class="hero"><div><p class="eyebrow">MATERIAL REVIEW / 素材审核</p><h1 id="wall-title">影序素材墙</h1><p class="intro">把每一份素材，放到正确的叙事位置。查看来源、对照句子，留下明确的取舍。</p></div><div class="export-actions"><a href="/api/export?format=json" download>导出 JSON ↗</a><a href="/api/export?format=csv" download>导出 CSV ↗</a></div></section>
-      <div id="startup" class="notice" role="status">正在连接本机服务…</div>
-      <section class="stats" aria-label="审核概览"><div><strong id="total-count">0</strong><span>素材总数</span></div><div><strong id="approved-count">0</strong><span><i class="dot approved"></i>已通过</span></div><div><strong id="pending-count">0</strong><span><i class="dot pending"></i>待审</span></div><div><strong id="rejected-count">0</strong><span><i class="dot rejected"></i>已弃用</span></div><div class="progress-summary"><div><span>审核进度</span><b id="progress-label">0%</b></div><progress id="progress" max="100" value="0">0%</progress></div></section>
-      <section class="filters" aria-label="筛选素材"><label class="search-label"><span>搜索素材</span><input id="search" type="search" placeholder="搜索编号、文件名、句子或用途…"></label><label><span>章节</span><select id="chapter"><option value="">全部章节</option></select></label><label><span>来源</span><select id="origin"><option value="">全部来源</option></select></label><label><span>审核</span><select id="review"><option value="">全部状态</option><option value="pending">待审</option><option value="approved">通过</option><option value="rejected">弃用</option></select></label></section>
-      <div class="section-heading"><h2>素材列表 <span id="visible-count">0</span></h2><p>点击卡片查看媒体与审核详情</p></div>
-      <div id="wall" class="wall"></div>
-      <div id="empty" class="empty" hidden><span>◇</span><h2>没有匹配的素材</h2><p>试试其他关键词，或调整章节、来源与审核筛选。</p><button id="clear-filters" class="button secondary">清除筛选</button></div>
-    </main>
-    <footer>审核记录保存在此素材墙目录的 reviews.json · 原始素材保持不变<br>缩略图、可播放与审核通过，均不能代替科学核验、完整观看和最终用户验收。</footer>
+    <aside class="workspace-sidebar">
+      <a class="brand" href="./index.html" aria-label="返回影序首页"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 5v22M16 5v22M24 5v22M8 8l16 9M8 17l16 9"/></svg><span>影序 <small>YINGXU</small></span></a>
+      <div class="workspace-label">创作空间 <span>LOCAL</span></div>
+      <nav aria-label="工作台页面">
+        <a href="#projects" data-route="projects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4z M14 4h6v6h-6z M4 14h6v6H4z M14 14h6v6h-6z"/></svg>项目工作台</a>
+        <a href="#assets" data-route="assets" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 8 9-5 9 5-9 5z M3 12l9 5 9-5 M3 16l9 5 9-5"/></svg>素材库</a>
+        <a href="#editor" data-route="editor"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z M7 5v14 M17 5v14 M3 10h4 M17 10h4 M3 14h4 M17 14h4"/></svg>时间线剪辑</a>
+        <a href="#prompts" data-route="prompts"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2c0 6-3 9-9 9 6 0 9 3 9 9 0-6 3-9 9-9-6 0-9-3-9-9z M19 3v6 M16 6h6"/></svg>提示词灵感库</a>
+        <a href="#agents" data-route="agents"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14v12H5z M12 8V4 M9 13h1 M14 13h1 M9 17h6"/></svg>智能体接入</a>
+        <a href="#exports" data-route="exports"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12v8h14v-8 M12 16V3 M8 7l4-4 4 4"/></svg>导出与检查</a>
+      </nav>
+      <div class="current-workspace"><small>当前工程</small><strong id="current-project">素材审核</strong><a href="#assets">查看素材库 →</a></div>
+      <nav class="workspace-settings" aria-label="工作台设置">
+        <a href="#settings" data-route="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18 M3 12h18 M3 18h18 M7 3v6 M15 9v6 M9 15v6"/></svg>偏好与配置</a>
+      </nav>
+      <a class="return-home" href="./index.html">返回封面 ↗</a>
+    </aside>
+    <div class="workspace-main">
+      <header class="masthead">
+        <div class="breadcrumbs"><button type="button" id="nav-toggle" aria-expanded="false" aria-label="打开导航">☰</button><span>创作空间</span><span aria-hidden="true">›</span><strong id="workspace-page">素材库</strong></div>
+        <div class="workspace-status"><span class="local-pill"><i></i> 本机审核</span><button class="button secondary" type="button" id="theme-toggle">暗黑</button></div>
+      </header>
+      <main class="workspace-body" id="workspace-body">
+      <section data-page="assets">
+        <section class="hero"><div><p class="eyebrow">MATERIAL LIBRARY / 素材库</p><h1 id="wall-title">影序素材墙</h1><p class="intro">把每一份素材，放到正确的叙事位置。查看来源、对照句子，留下明确的取舍。</p></div><div class="export-actions"><a href="/api/export?format=json" download>导出 JSON ↗</a><a href="/api/export?format=csv" download>导出 CSV ↗</a></div></section>
+        <div id="startup" class="notice" role="status">正在连接本机服务…</div>
+        <section class="stats" aria-label="审核概览"><div><strong id="total-count">0</strong><span>素材总数</span></div><div><strong id="approved-count">0</strong><span><i class="dot approved"></i>已通过</span></div><div><strong id="pending-count">0</strong><span><i class="dot pending"></i>待审</span></div><div><strong id="rejected-count">0</strong><span><i class="dot rejected"></i>已弃用</span></div><div class="progress-summary"><div><span>审核进度</span><b id="progress-label">0%</b></div><progress id="progress" max="100" value="0">0%</progress></div></section>
+        <section class="filters" aria-label="筛选素材"><label class="search-label"><span>搜索素材</span><input id="search" type="search" placeholder="搜索编号、文件名、句子或用途…"></label><label><span>章节</span><select id="chapter"><option value="">全部章节</option></select></label><label><span>来源</span><select id="origin"><option value="">全部来源</option></select></label><label><span>审核</span><select id="review"><option value="">全部状态</option><option value="pending">待审</option><option value="approved">通过</option><option value="rejected">弃用</option></select></label></section>
+        <div class="section-heading"><h2>素材列表 <span id="visible-count">0</span></h2><p>点击卡片查看媒体与审核详情</p></div>
+        <div id="wall" class="wall"></div>
+        <div id="empty" class="empty" hidden><span>◇</span><h2>没有匹配的素材</h2><p>试试其他关键词，或调整章节、来源与审核筛选。</p><button id="clear-filters" class="button secondary">清除筛选</button></div>
+      </section>
+      <section data-page="projects" hidden>
+        <div class="hero"><div><p class="eyebrow">YOUR CREATIVE SPACE / 项目工作台</p><h1>让下一个故事，从这里开始。</h1><p class="intro">从项目计划进入文稿与素材，或用内置演示完整走一遍。命令从开源包的技能目录运行。</p></div></div>
+        <div class="workflow-grid">
+          <article class="workflow-card"><h2>完整演示</h2><p>用程序生成的素材演示文稿、审核、剪辑、检查和归档。</p>
+          <pre><code>python3 scripts/demo_project.py --output ../../../yingxu-demo</code></pre><button type="button" class="button secondary copy-command">复制命令</button>
+          <a class="button secondary" href="#assets">返回当前素材库</a></article>
+<article class="workflow-card"><h2>人工设置</h2><p>新建项目目录与计划，设定章节、总时长和帧率。</p>
+          <pre><code>python3 scripts/filmkit.py init ../../../my-film --chapters 3 --max-seconds 300 --fps 25</code></pre><button type="button" class="button secondary copy-command">复制命令</button></article>
+<article class="workflow-card"><h2>文稿与分镜交接</h2><p>从文档提取结构、导出可编辑旁白，再把文稿句子、素材与镜头用途关联。</p>
+          <pre><code>python3 scripts/content_tools.py --help</code></pre><button type="button" class="button secondary copy-command">复制命令</button>
+          <a class="button secondary" href="https://github.com/zcxpub-cmd/award-video-production/blob/main/docs/features.md">查看文稿交接说明</a></article>
+        </div>
+      </section>
+      <section data-page="editor" hidden>
+        <div class="hero"><div><p class="eyebrow">TIMELINE / 时间线剪辑</p><h1>让每个镜头，落到正确的位置。</h1><p class="intro">开源工作流通过剪辑配方定义片段、旁白、字幕和章节，再由 FFmpeg 渲染。</p></div></div>
+        <div class="workflow-grid">
+          <article class="workflow-card"><h2>画面编排</h2><p>按源内范围、时长和章节编排镜头。编辑 JSON 配方后运行渲染。</p>
+          <pre><code>python3 scripts/media_tools.py render edit.json --output film-v1</code></pre><button type="button" class="button secondary copy-command">复制命令</button>
+          <a class="button secondary" href="https://github.com/zcxpub-cmd/award-video-production/blob/main/skills/science-achievement-film/assets/edit-recipe.example.json">查看剪辑配方</a></article>
+<article class="workflow-card"><h2>字幕与标题</h2><p>使用实测时间码生成可编辑的 SRT 与 ASS。</p>
+          <pre><code>python3 scripts/media_tools.py subtitles subtitle-timing.json --output subtitles-v1</code></pre><button type="button" class="button secondary copy-command">复制命令</button></article>
+<article class="workflow-card"><h2>旁白与混音</h2><p>按配音、BGM 和明确时间区间设置音量、淡化与压低音乐。</p>
+          <pre><code>python3 scripts/media_tools.py audio audio.json --output audio-v1</code></pre><button type="button" class="button secondary copy-command">复制命令</button></article>
+<article class="workflow-card"><h2>原生后期</h2><p>需要调色、稳像或精细交付时，在 DaVinci Resolve 使用原素材重开并检查。</p>
+          <a class="button secondary" href="https://github.com/zcxpub-cmd/award-video-production/blob/main/docs/features.md">查看后期工作流</a></article>
+        </div>
+      </section>
+      <section data-page="prompts" hidden>
+        <div class="hero"><div><p class="eyebrow">PROMPT LIBRARY / 提示词灵感库</p><h1>为每个镜头，找到恰当的描述。</h1><p class="intro">使用开源包的镜头模板、参考约束和声音流程。</p></div></div>
+        <div class="workflow-grid">
+          <article class="workflow-card"><h2>分镜与运镜</h2><p>明确主体、镜头运动、光线、节奏和禁止改动项。</p>
+          <a class="button secondary" href="https://github.com/zcxpub-cmd/award-video-production/blob/main/skills/science-achievement-film/assets/shot-prompt.md">打开镜头提示词模板</a></article>
+<article class="workflow-card"><h2>视频生成</h2><p>按镜头使用参考图与提示词。通过 Seedance 命令查看验证、查询和下载用法。</p>
+          <pre><code>python3 references/integrations/seedance_http.py --help</code></pre><button type="button" class="button secondary copy-command">复制命令</button></article>
+<article class="workflow-card"><h2>配音与停连</h2><p>先确认专名读音、数字单位和小样，再按时间码交给混音工具。</p>
+          <a class="button secondary" href="https://github.com/zcxpub-cmd/award-video-production/blob/main/docs/features.md">查看配音与生成流程</a></article>
+        </div>
+      </section>
+      <section data-page="agents" hidden>
+        <div class="hero"><div><p class="eyebrow">AGENT TOOLS / 智能体接入</p><h1>把工具交给你的创作搭档。</h1><p class="intro">Codex Skill 和能启动本地进程的智能体宿主共用这些工具。输出为结构化 JSON。</p></div></div>
+        <div class="workflow-grid">
+          <article class="workflow-card"><h2>工作台启动</h2><p>已有素材墙时打开动态首页，由用户点击进入素材墙。</p>
+          <pre><code>python3 scripts/agent_tools.py launch ../../../yingxu-demo/wall</code></pre><button type="button" class="button secondary copy-command">复制命令</button></article>
+<article class="workflow-card"><h2>工具发现</h2><p>读取素材盘点、工程检查和媒体探测的工具定义及参数。</p>
+          <pre><code>python3 scripts/agent_tools.py list</code></pre><button type="button" class="button secondary copy-command">复制命令</button></article>
+<article class="workflow-card"><h2>工具调用</h2><p>将一个 JSON 参数对象送入标准输入，可接收报告并交给使用者审核。</p>
+          <pre><code>printf '%s\n' '{"source":"./media"}' | python3 scripts/agent_tools.py invoke inventory</code></pre><button type="button" class="button secondary copy-command">复制命令</button>
+          <a class="button secondary" href="https://github.com/zcxpub-cmd/award-video-production/blob/main/docs/agent-integration.md">查看接入协议</a></article>
+        </div>
+      </section>
+      <section data-page="exports" hidden>
+        <div class="hero"><div><p class="eyebrow">EXPORT & REVIEW / 导出与检查</p><h1>把取舍与结果，一起交付。</h1><p class="intro">从素材审核记录到可复查的影片与交接归档。</p></div></div>
+        <div class="workflow-grid">
+          <article class="workflow-card"><h2>审核记录</h2><p>下载当前素材墙已保存的审核结论和备注。</p><div class="export-actions"><a href="/api/export?format=json" download>导出 JSON ↗</a><a href="/api/export?format=csv" download>导出 CSV ↗</a></div></article>
+<article class="workflow-card"><h2>影片检查</h2><p>检查媒体参数和完整解码，标记黑场与冻结候选。</p>
+          <pre><code>python3 scripts/media_tools.py qc film-v1/film.mp4 --output qc.json</code></pre><button type="button" class="button secondary copy-command">复制命令</button></article>
+<article class="workflow-card"><h2>依赖归档</h2><p>根据归档计划复制依赖并生成可校验的清单。</p>
+          <pre><code>python3 scripts/archive_tools.py create archive-plan.json --out archive-v1</code></pre><button type="button" class="button secondary copy-command">复制命令</button></article>
+        </div>
+      </section>
+      <section data-page="settings" hidden>
+        <div class="hero"><div><p class="eyebrow">PREFERENCES / 偏好与配置</p><h1>让工作台，适合你的节奏。</h1><p class="intro">在此切换外观，查看运行依赖和本地保存方式。</p></div></div>
+        <div class="workflow-grid">
+          <article class="workflow-card"><h2>外观与体验</h2><p>选择暗黑或暖白，设置保存在当前浏览器。</p><div class="theme-options"><button class="button secondary" type="button" data-theme-choice="dark">暗黑</button><button class="button secondary" type="button" data-theme-choice="light">暖白</button></div></article>
+<article class="workflow-card"><h2>本机运行检查</h2><p>检查 FFmpeg、FFprobe 等运行依赖，并查看可用适配器。</p>
+          <pre><code>python3 scripts/runtime_tools.py doctor --config assets/runtime-config.example.json</code></pre><button type="button" class="button secondary copy-command">复制命令</button></article>
+<article class="workflow-card"><h2>工程与本地数据</h2><p>审核记录保存在启动素材墙的目录，导出可用于交接。</p>
+          <a class="button secondary" href="#exports">打开导出与检查</a></article>
+        </div>
+      </section>
+      </main>
+      <p class="workspace-footer">审核记录保存在当前素材墙目录的 reviews.json</p>
+      <div id="workspace-toast" role="status" hidden></div>
+    </div>
   </div>
   <dialog id="detail" aria-labelledby="detail-title"><div class="dialog-head"><div><p class="eyebrow" id="detail-chapter"></p><h2 id="detail-title">素材详情</h2></div><button id="close-detail" class="icon-button" aria-label="关闭素材详情">×</button></div><div class="detail-grid"><section class="media-side"><div id="player" class="player"></div><div class="media-info" id="media-info"></div><div id="detail-issues" class="issues"></div><div class="detail-block"><h3>叙事用途</h3><p id="detail-purpose"></p><h3>对应句子</h3><div id="detail-sentences" class="chips"></div></div></section><section class="review-side"><div class="detail-block"><h3>素材信息</h3><dl id="detail-metadata"></dl></div><div class="review-box"><h3>审核决定</h3><label for="edit-status">当前状态</label><select id="edit-status"><option value="pending">待审 · 还需核实</option><option value="approved">通过 · 可进入制作</option><option value="rejected">弃用 · 不纳入制作</option></select><label for="edit-note">审核备注</label><textarea id="edit-note" rows="5" maxlength="10000" placeholder="记录选择理由、适用范围或待确认问题…"></textarea><div class="save-row"><span id="save-status" role="status">尚未修改</span><button id="save-review" class="button">保存审核</button></div><p class="small-note">保存后写入本地 JSON，重启服务后仍保留。导出包含最新已保存记录。</p></div></section></div></dialog>
   <template id="card-template"><article class="card"><button class="open-card" type="button"><div class="card-media"><div class="placeholder"><span class="media-symbol">▷</span><span class="media-type">视频素材</span></div><div class="card-badges"></div><span class="open-label">查看与审核 ↗</span></div><div class="card-body"><div class="card-top"><h3 class="asset-name"></h3><span class="review-badge"></span></div><p class="file-name"></p><div class="card-context"><span class="chapter-name"></span><span class="origin-name"></span></div><p class="purpose"></p><div class="sentence-list chips"></div><p class="card-note"></p></div></button></article></template>
