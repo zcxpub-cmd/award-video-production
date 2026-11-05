@@ -1,7 +1,7 @@
 {
   "name": "science-achievement-film",
   "version": "1.4.0",
-  "description": "颁奖与成果展示视频制作：内置素材墙、文稿、剪辑字幕、技术检查、归档工具及外部软件操作方法。",
+  "description": "面向创作者、内容团队和企业的视频制作工具，覆盖策划分镜、素材管理、AI 协作剪辑、字幕混音、审核与导出。",
   "author": {
     "name": "Award Video Production contributors"
   },
@@ -14,12 +14,17 @@
     "视频制作",
     "旁白",
     "素材墙",
-    "达芬奇"
+    "达芬奇",
+    "短视频",
+    "产品视频",
+    "品牌故事",
+    "教程",
+    "创意短片"
   ],
   "interface": {
     "displayName": "影序",
     "shortDescription": "从资料和素材墙到剪辑、审核与归档的可复用制作工具。",
-    "longDescription": "面向颁奖、成果发布和科学传播的视频工作流。内置可播放审核素材墙、文稿导出、语义交接、字幕标题、基础剪辑混音、分章导出、技术检查和归档工具；附语音、生成、视频分析、几何、文档与达芬奇的独立操作配方。运行依赖按用户环境配置，不包含账号、模型或私有项目。",
+    "longDescription": "面向个人创作者、内容团队和企业的视频工作流，适用于短视频、产品介绍、品牌故事、教程课程、活动影像、纪录表达、创意短片和科学传播。内置素材审核、文稿分镜、字幕标题、剪辑混音、导出和交付核验；外部模型与制作软件按用户环境配置。",
     "developerName": "Award Video Production contributors",
     "category": "Creative",
     "capabilities": [

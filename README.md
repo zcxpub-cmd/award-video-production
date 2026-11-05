@@ -2,7 +2,9 @@
 
 **让故事，连接脉动。**
 
-面向智能体的视频制作工具集。用于颁奖、成果发布和科学传播视频，从权威资料与文案、素材审核到剪辑、后期交接和交付归档。
+面向个人创作者、内容团队和企业的视频创作工作台与智能体工具集。支持短视频、产品介绍、品牌故事、教程课程、活动影像、纪录表达、创意短片和科学传播，覆盖策划、分镜、素材管理、AI 协作剪辑与成片导出。
+
+Yingxu is an AI-assisted video creation workbench and agent toolkit for individual creators, teams, and businesses. Plan stories, organize assets, edit timelines, and export videos for social media, products, brands, education, events, documentaries, creative films, and science communication.
 
 影序原名「颁奖视频制作」。仓库地址和插件安装命令继续沿用原有标识。
 
