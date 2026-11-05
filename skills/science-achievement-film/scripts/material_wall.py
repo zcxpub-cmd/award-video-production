@@ -36,6 +36,7 @@ HOME_STATIC = {
     "/": ("home.html", "text/html; charset=utf-8"),
     "/index.html": ("home.html", "text/html; charset=utf-8"),
     "/home.css": ("home.css", "text/css; charset=utf-8"),
+    "/language.js": ("language.js", "text/javascript; charset=utf-8"),
     "/home.js": ("home.js", "text/javascript; charset=utf-8"),
     "/cover-scenes.js": ("cover-scenes.js", "text/javascript; charset=utf-8"),
 }
@@ -159,7 +160,7 @@ def build(args):
         warnings.append("代理生成需要本机 ffmpeg 和 ffprobe；缺失时跳过，不会自动安装。")
     try:
         (temporary / "media").mkdir()
-        for filename in ("app.js", "style.css", "home.css", "home.js", "cover-scenes.js"):
+        for filename in ("app.js", "style.css", "home.css", "home.js", "cover-scenes.js", "language.js"):
             shutil.copyfile(TEMPLATES / filename, temporary / filename)
         shutil.copytree(TEMPLATES / "cover", temporary / "cover")
         shutil.copyfile(TEMPLATES / "home.html", temporary / "index.html")

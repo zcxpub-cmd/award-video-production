@@ -1,3 +1,4 @@
+import { LanguageSwitch, tr } from './i18n'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { ArrowRight, ArrowUpRight, Play } from '@phosphor-icons/react'
 import { sceneForHomeVisit, type HomeScene } from './homeScenes'
@@ -85,7 +86,7 @@ function HomeBackground({ motion }: { motion: boolean }) {
   if (!scene) return null
 
   return <>
-    <img className="home-still" src={scene.poster} alt={`图序主题画面：${scene.name}`} fetchPriority="high" />
+    <img className="home-still" src={scene.poster} alt={tr("图序主题画面：{0}", tr(scene.name))} fetchPriority="high" />
     {videoActive && <video
       ref={video}
       className="home-film"
@@ -107,9 +108,9 @@ export default function Home({onEnter,onCreate,onResume,motion}:{onEnter:()=>voi
  return <main className="home">
   <HomeBackground motion={motion}/>
   <div className="home-shade"/><div className="home-grain" aria-hidden="true"/>
-  <nav className="home-nav"><Brand/><div><button onClick={onEnter}>创作工作台</button><button onClick={onResume}>我的项目</button><span className="home-badge">开源工作台 1.4</span></div><button className="home-nav-cta" onClick={onCreate}>开始创作 <ArrowUpRight size={18}/></button></nav>
-  <section className="home-copy"><div className="home-kicker"><span/> A SPACE FOR YOUR NEXT STORY</div><h1>让故事，<br/>连接<span>脉动。</span></h1><p>从一份素材，到一个值得讲述的故事。<br/>把想象交给 AI，把每一次选择留给你。</p><div className="home-actions"><button onClick={onCreate}>开启一个故事 <ArrowRight size={23}/></button><button onClick={onEnter}><Play size={17} weight="fill"/> 探索工作台</button></div><div className="home-principles"><span>本地素材</span><i/><span>对话剪辑</span><i/><span>自由掌控</span></div></section>
-  <div className="home-film-note"><span className="frame-corner"/><div><small>THE OPENING FRAME</small><p>故事，始于看见。</p></div><span className="home-time">00:00:01:12</span></div>
-  <footer className="home-footer"><span>素材 <i>／</i> 叙事 <i>／</i> 成片</span><div><span className="status-dot"/> YOUR STORY, YOUR RHYTHM</div><button onClick={onEnter}>进入工作台 <ArrowRight size={16}/></button></footer>
+  <nav className="home-nav"><Brand/><div><button onClick={onEnter}>{tr("创作工作台")}</button><button onClick={onResume}>{tr("我的项目")}</button><span className="home-badge">{tr("开源工作台 1.4")}</span></div><div className="home-nav-actions"><LanguageSwitch/><button className="home-nav-cta" onClick={onCreate}>{tr("开始创作")} <ArrowUpRight size={18}/></button></div></nav>
+  <section className="home-copy"><div className="home-kicker"><span/> A SPACE FOR YOUR NEXT STORY</div><h1>{tr("让故事，")}<br/>{tr("连接")}<span>{tr("脉动。")}</span></h1><p>{tr("从一份素材，到一个值得讲述的故事。")}<br/>{tr("把想象交给 AI，把每一次选择留给你。")}</p><div className="home-actions"><button onClick={onCreate}>{tr("开启一个故事")} <ArrowRight size={23}/></button><button onClick={onEnter}><Play size={17} weight="fill"/> {tr("探索工作台")}</button></div><div className="home-principles"><span>{tr("本地素材")}</span><i/><span>{tr("对话剪辑")}</span><i/><span>{tr("自由掌控")}</span></div></section>
+  <div className="home-film-note"><span className="frame-corner"/><div><small>THE OPENING FRAME</small><p>{tr("故事，始于看见。")}</p></div><span className="home-time">00:00:01:12</span></div>
+  <footer className="home-footer"><span>{tr("素材")} <i>／</i> {tr("叙事")} <i>／</i> {tr("成片")}</span><div><span className="status-dot"/> YOUR STORY, YOUR RHYTHM</div><button onClick={onEnter}>{tr("进入工作台")} <ArrowRight size={16}/></button></footer>
  </main>
 }

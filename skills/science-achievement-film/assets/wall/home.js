@@ -5,7 +5,7 @@ if (window.location.protocol !== 'file:') {
   document.querySelectorAll('[data-wall-entry]').forEach(link => {
     link.href = './wall.html';
   });
-  enter.firstChild.textContent = '进入素材墙 ';
+  enter.firstChild.textContent = trWall('进入素材墙') + ' ';
 }
 
 const key = 'yingxu.community.home-scene-order.v1';
@@ -102,9 +102,9 @@ function showScene() {
   video.style.opacity = '0';
   scene = nextScene();
   failed = false;
-  label.textContent = scene.name;
+  label.textContent = trWall(scene.name);
   poster.src = './cover/' + scene.id + '.webp';
-  poster.alt = '图序主题画面：' + scene.name;
+  poster.alt = trWall('图序主题画面：{0}', trWall(scene.name));
   poster.hidden = false;
   video.dataset.scene = scene.id;
   syncPlayback();
@@ -136,8 +136,15 @@ motion.hidden = false;
 motion.addEventListener('click', () => {
   paused = !paused;
   motion.setAttribute('aria-pressed', String(paused));
-  motion.textContent = paused ? '恢复动效' : '暂停动效';
+  motion.textContent = trWall(paused ? '恢复动效' : '暂停动效');
   syncPlayback();
 });
 
 showScene();
+
+window.addEventListener('yingxu-language-change', () => {
+  if (location.protocol !== 'file:') enter.firstChild.textContent = trWall('进入素材墙') + ' ';
+  motion.textContent = trWall(paused ? '恢复动效' : '暂停动效');
+  label.textContent = trWall(scene.name);
+  poster.alt = trWall('图序主题画面：{0}', trWall(scene.name));
+});

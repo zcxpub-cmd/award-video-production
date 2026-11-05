@@ -10,11 +10,17 @@
 
 [下载 v1.4.0 开源工作台 ZIP](https://github.com/zcxpub-cmd/award-video-production/releases/download/v1.4.0/award-video-production-v1.4.0.zip) · [下载 v1.4.0 图文使用手册（PDF）](https://github.com/zcxpub-cmd/award-video-production/releases/download/v1.4.0/yingxu-v1.4.0-user-guide-zh-CN.pdf) · [安装与使用说明](docs/使用说明书.md)
 
-1. 安装 Python 3.10 或更新版本，然后解压 Release 附件中的发行 ZIP。
+[下载最新中英文工作台源码 ZIP / Download the bilingual source](https://github.com/zcxpub-cmd/award-video-production/archive/refs/heads/main.zip)。主分支附带已构建的中英文界面。v1.4.0 发行附件与 PDF 手册对应此前发布的中文版本。
+
+1. 安装 Python 3.10 或更新版本，然后解压上方最新源码 ZIP，或下载 Release 附件中的发行 ZIP。
 2. macOS 双击 `启动影序.command`，Windows 双击 `start-yingxu.bat`，Linux 运行 `sh start-yingxu.sh`。首次联网准备本机依赖，随后自动打开动态首页。
 3. 点「开始创作」，填写项目名，选择「人工设置」或「一键成片」。从素材库导入文件，再在「时间线剪辑」编辑。成片和工程包在「导出与检查」下载。
 
 工作台提供 12 份可填变量的原创提示词模板、四个内置制作角色及手动多轨编辑。需要 AI 剪辑、画面观察或导演编排时，在「偏好与配置」连接自己的本机 Ollama。技术审核与手动制作可独立运行。
+
+首页与工作台顶部提供 **EN / 中文** 切换，浏览器记住语言。七个工作页、12 份原创提示词模板和智能体说明支持英文；在「内置智能体」查看各角色的调用条件。已有工程名称、字幕和用户素材按原语言保留。
+
+Download the bilingual source ZIP above, then select **EN** at the top of the home page or workbench to switch to English. The browser remembers your language. Use **Production Agents** to see when each role runs. To launch, use `启动影序.command` on macOS, `start-yingxu.bat` on Windows, or `sh start-yingxu.sh` on Linux.
 
 已有命令行素材审核墙可继续用 `agent_tools.py launch` 打开。能启动本地进程的智能体可以用 `agent_tools.py studio` 启动完整工作台。双击 `打开影序.html` 可离线查看 18 景动态封面与安装说明。[画面来源](docs/home-cover-assets.md)
 

@@ -1,3 +1,4 @@
+import { getLanguage } from './i18n'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { api, activeTask, type Bootstrap, type RuntimeSettings, type Task, type Workspace } from './api'
 import { commit, type Edit, type History, type Project } from './editor'
@@ -67,7 +68,7 @@ export function useWorkspace(notify:(s:string)=>void){
   catch(e){const current=await api.settings().catch(()=>null);if(current)install({...ref.current!,settings:current.settings});notify((e as Error).message);throw e}
  }
  const refreshModels=async()=>{const r=await api.settings();setModels(r.models);install({...ref.current!,settings:r.settings});return r}
- const start=async(kind:Task['kind'],options:Record<string,unknown>)=>{await flush();const w=ref.current!;const task=await api.start(w.current,w.projects[w.current].present.revision,kind,options);setJobs(j=>[task,...j.filter(x=>x.id!==task.id)]);return task}
+ const start=async(kind:Task['kind'],options:Record<string,unknown>)=>{await flush();const w=ref.current!;const task=await api.start(w.current,w.projects[w.current].present.revision,kind,getLanguage()==='en'?{...options,language:'en'}:options);setJobs(j=>[task,...j.filter(x=>x.id!==task.id)]);return task}
  const applyAI=async(id:string)=>{const h=await api.apply(id);updateHistory(h.present.id,h);const task=await api.task(id);setJobs(j=>j.map(x=>x.id===id?task:x));return h}
  const cancel=async(id:string)=>{const result=await api.cancel(id);setJobs(j=>j.map(x=>x.id===id?result:x));return result}
  const query=async(id:string,external?:string)=>{const result=await api.query(id,external);setJobs(j=>j.map(x=>x.id===id?result:x));return result}

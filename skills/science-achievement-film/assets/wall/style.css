@@ -104,3 +104,19 @@ progress::-webkit-progress-bar { background: var(--raised); }
   #nav-toggle { display: inline-block; color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 5px; }
   .masthead { padding-inline: 16px; }
 }
+
+[data-language-switch] {
+  flex: none;
+  min-width: 42px;
+  padding: 6px 8px;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  color: inherit;
+  font-size: 12px;
+  white-space: nowrap;
+}
+[data-language-switch]:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+html[lang="en"] .brand small { display: none; }

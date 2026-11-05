@@ -118,6 +118,7 @@ class Jobs:
                 last[0]=time.monotonic()
         try:
             private=job['_private'];p=private['snapshot'];records=private['records'];options=private['options']
+            agent_language = {'language': 'en'} if options.get('language') == 'en' else {}
             if self.store.private_settings()['execution_revision']!=private['execution_revision'] and job['kind']!='render' and not (job['kind']=='generation' and job.get('external_id')):
                 raise Conflict('模型或执行设置已改变，请基于当前设置重新发起。')
             if job['kind']=='render':
@@ -126,13 +127,13 @@ class Jobs:
                 patch={'status':'succeeded','stage':'成片已导出，技术解码通过','progress':1,'result':result}
             elif job['kind']=='observe':
                 progress('本地模型观察抽样画面',None)
-                aid=options['asset_id'];result=self.agent.observe(records[aid],self.media,private['model'],cancel,connection)
+                aid=options['asset_id'];result=self.agent.observe(records[aid],self.media,private['model'],cancel,connection,**agent_language)
                 self.store.save_observation(p['id'],aid,records[aid]['sha256'],result,guard_job=jid)
                 atomic_json(folder/'observation.json',result)
                 patch={'status':'succeeded','stage':'抽样观察已保存，仍需内容审核','progress':1,'result':result}
             elif job['kind']=='ai-edit':
                 progress('本地模型正在规划剪辑操作',None)
-                proposal,metrics=self.agent.edit(p,options['instruction'],options.get('selected'),options.get('playhead',0),private['model'],cancel,chunk,connection,recent_messages=private.get('recent_messages',()))
+                proposal,metrics=self.agent.edit(p,options['instruction'],options.get('selected'),options.get('playhead',0),private['model'],cancel,chunk,connection,recent_messages=private.get('recent_messages',()),**agent_language)
                 result=dict(proposal,metrics=metrics,base_revision=p['revision'],execution_revision=private['execution_revision'])
                 atomic_json(folder/'proposal.json',result)
                 if cancel.is_set():raise Cancelled()
@@ -154,7 +155,8 @@ class Jobs:
                 source['target']=options.get('target',p['target']);source['brief']=options.get('brief',p['brief'])
                 if not any(a['kind']!='audio' and a['id'] in records for a in source['assets']):raise DomainError('请至少选择一份可用画面素材。')
                 observations={a['id']:records[a['id']]['analysis'] for a in source['assets'] if a['id'] in records and records[a['id']].get('analysis')}
-                summary='按所选素材顺序编排。';sequence=None
+                summary = 'Arranged in selected media order.' if agent_language else '按所选素材顺序编排。'
+                sequence=None
                 if options.get('use_ai'):
                     if options.get('analyze_assets'):
                         candidates=[a for a in source['assets'] if a['kind']!='audio' and a['id'] in records]
@@ -163,15 +165,19 @@ class Jobs:
                             progress(f'观察素材 {i+1}/{len(candidates)}',None)
                             record=records[a['id']]
                             if not observations.get(a['id']):
-                                result=self.agent.observe(record,self.media,private['model'],cancel,connection)
+                                result=self.agent.observe(record,self.media,private['model'],cancel,connection,**agent_language)
                                 observations[a['id']]=result;self.store.save_observation(p['id'],a['id'],a['sha256'],result,guard_job=jid)
                     progress('本地导演规划镜头顺序',None)
-                    plan,metrics=self.agent.plan(source,observations,private['model'],cancel,chunk,connection)
+                    plan,metrics=self.agent.plan(source,observations,private['model'],cancel,chunk,connection,**agent_language)
                     sequence=plan['sequence'];summary=plan['summary']
                     atomic_json(folder/'director-plan.json',dict(plan,metrics=metrics,observations=observations))
                 clips=arrange(source,sequence)
                 actual=duration({'clips':clips})
-                if actual<source['target']-1/p['fps']:summary+=f' 可用画面不足：目标{source["target"]:.2f}秒，实际{actual:.2f}秒。'
+                if actual<source['target']-1/p['fps']:
+                    if agent_language:
+                        summary += f' Available footage covers {actual:.2f}s of the {source["target"]:.2f}s target.'
+                    else:
+                        summary += f' 可用画面不足：目标{source["target"]:.2f}秒，实际{actual:.2f}秒。'
                 if any(t['muted'] for t in p['tracks'] if t['id']=='V1'):raise DomainError('主画面轨道已静音，请先启用后再一键制作。')
                 if self.store.private_settings()['execution_revision']!=private['execution_revision']:
                     raise Conflict('执行设置已变化，本次方案没有覆盖工程。')

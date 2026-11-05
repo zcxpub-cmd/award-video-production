@@ -18,7 +18,7 @@ from datetime import datetime, timezone
 
 DURATION = 2.4
 REQUIRED_SCRIPTS = ("demo_project.py", "content_tools.py", "material_wall.py", "media_tools.py", "archive_tools.py")
-WALL_FILES = ("index.html", "app.js", "style.css", "home.html", "home.css", "home.js", "cover-scenes.js", "cover-manifest.json", "cover-license.txt")
+WALL_FILES = ("index.html", "app.js", "style.css", "home.html", "home.css", "home.js", "cover-scenes.js", "language.js", "cover-manifest.json", "cover-license.txt")
 REQUIRED_FILTERS = {"testsrc2", "sine", "volume", "ass", "blackdetect", "freezedetect", "metadata"}
 
 

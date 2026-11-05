@@ -366,3 +366,18 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--copper); outlin
 .quick-start p:not(.eyebrow) { max-width: 76ch; color: var(--muted); }
 pre { overflow-x: auto; border: 1px solid var(--line); background: #1c191d; padding: 15px; border-radius: 8px; }
 code { font-family: ui-monospace, Menlo, Consolas, monospace; }
+[data-language-switch] {
+  flex: none;
+  min-width: 42px;
+  padding: 6px 8px;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  color: inherit;
+  font-size: 12px;
+  white-space: nowrap;
+}
+[data-language-switch]:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+html[lang="en"] .brand small { display: none; }
