@@ -24,7 +24,7 @@ from runtime_lock import lock_file
 COVER = ROOT.parent / 'assets/wall/cover'
 DATA = ROOT / 'data'
 IDENTITY = 'yingxu-community-workbench'
-VERSION = '1.4.0'
+VERSION = '1.4.1'
 COOKIE = 'yingxu-community-session'
 
 def sample_path(name):

@@ -18,7 +18,7 @@ from runtime_lock import lock_file
 ROOT = Path(__file__).resolve().parent
 REQUIREMENTS = ROOT / "backend" / "requirements.txt"
 IDENTITY = "yingxu-community-workbench"
-VERSION = "1.4.0"
+VERSION = "1.4.1"
 HTTP = build_opener(ProxyHandler({}))
 
 
