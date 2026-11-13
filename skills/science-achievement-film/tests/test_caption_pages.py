@@ -61,4 +61,20 @@ class CaptionPagesTests(unittest.TestCase):
             rows=[line.split(',') for line in (p/'layers.ass').read_text().splitlines() if line.startswith('Dialogue:')]
             self.assertEqual([(row[1],row[2]) for row in rows],[('0:00:00.01','0:00:00.02'),('0:00:00.02','0:00:00.03')])
 
+    def test_ascii_closing_parenthesis_never_starts_exported_page(self):
+        text='(一二三)后续'
+        _,srt,_=self.export(text,pagination={'max_columns':4})
+        pages=[b.splitlines()[2] for b in srt.strip().split('\n\n')]
+        self.assertEqual(''.join(pages),text)
+        self.assertFalse(any(p.startswith(')') or p.endswith('(') for p in pages))
+
+    def test_technical_term_suffix_stays_with_latin_word(self):
+        for term in ['C++','C#','CD4+','FGF1','IL-6']:
+            with self.subTest(term=term):
+                text='新算法使用'+term+'实现。'
+                _,srt,_=self.export(text,pagination={'max_columns':6})
+                pages=[b.splitlines()[2] for b in srt.strip().split('\n\n')]
+                self.assertEqual(''.join(pages),text)
+                self.assertTrue(any(term in p for p in pages))
+
 if __name__=='__main__':unittest.main()

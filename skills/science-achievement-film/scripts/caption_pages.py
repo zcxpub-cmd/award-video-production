@@ -7,10 +7,10 @@ import math
 import re
 import unicodedata
 
-NO_START = frozenset('，。；、：！？）》】」』”’）,.;:!?%')
+NO_START = frozenset('，。；、：！？）》】」』”’）,.;:!?%)')
 NO_END = frozenset('（《【「『“‘(')
 PAUSES = frozenset('，。；、：！？,.;:!?')
-WORDS = re.compile(r'[A-Za-z0-9]+(?:[.\-+][A-Za-z0-9]+)*')
+WORDS = re.compile(r'[A-Za-z0-9]+(?:[.\-+][A-Za-z0-9]+)*[+#]*')
 CLAUSES = re.compile(r'(?=而且|并且|通过|从而|其中|因此|为了|由于|以及|同时|如何|为什么)')
 
 
