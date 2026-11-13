@@ -185,13 +185,22 @@ def timestamp(value, ass=False):
 
 
 def subtitle_files(spec, folder, timeline_duration=None):
-    keys(spec, ['width', 'height', 'font', 'font_size', 'subtitles', 'titles'], 'subtitle document')
+    keys(spec, ['width', 'height', 'font', 'font_size', 'subtitles', 'titles', 'pagination'], 'subtitle document')
     w = number(spec.get('width', 1920), 'width', 16, 7680, True)
     h = number(spec.get('height', 1080), 'height', 16, 7680, True)
     font = spec.get('font', 'PingFang SC')
     if not isinstance(font, str) or not font.strip() or any(c in font for c in ',\n\r{}\\'):
         raise MediaError('Invalid font family')
     font_size = number(spec.get('font_size', 48), 'font_size', 8, 400)
+    pagination = spec.get('pagination')
+    if pagination is not None:
+        keys(pagination, ['max_columns'], 'pagination')
+        maximum = number(pagination.get('max_columns', 25), 'max_columns', 4, 80, True)
+        # Loaded next to this script even when the CLI is imported by an agent tool.
+        import importlib.util
+        module_spec = importlib.util.spec_from_file_location('caption_pages', Path(__file__).with_name('caption_pages.py'))
+        pages_module = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(pages_module)
     events, srt = [], []
     for kind in ['subtitles', 'titles']:
         items = spec.get(kind, [])
@@ -207,10 +216,18 @@ def subtitle_files(spec, folder, timeline_duration=None):
             if not isinstance(content, str) or not content.strip() or len(content) > 10000 or '\x00' in content:
                 raise MediaError('Subtitle text must be nonempty text, at most 10000 characters')
             content = content.replace('\r\n', '\n').replace('\r', '\n')
+            pages = [(a, b, content)]
+            if kind == 'subtitles' and pagination is not None:
+                size = number(item.get('font_size', font_size), 'font_size', 8, 400)
+                # Conservative CJK width; final font/placement still needs visual review.
+                available = min(maximum, max(1, (w-120)/size))
+                try:
+                    pages = pages_module.timed_pages(content, a, b, available)
+                except ValueError as exc:
+                    raise MediaError(str(exc)) from exc
             if kind == 'subtitles':
-                srt.append((a, b, content))
+                srt.extend(pages)
             # Prevent user text being interpreted as ASS override syntax.
-            safe = content.replace('\\', '＼').replace('{', '｛').replace('}', '｝').replace('\n', '\\N')
             style = 'Title' if kind == 'titles' else 'Subtitle'
             override = ''
             if 'x' in item or 'y' in item:
@@ -220,9 +237,13 @@ def subtitle_files(spec, folder, timeline_duration=None):
             if 'font_size' in item:
                 size = number(item['font_size'], 'font_size', 8, 400)
                 override += f'\\fs{size:g}'
-            if override:
-                safe = '{' + override + '}' + safe
-            events.append((a, f'Dialogue: {1 if kind == "titles" else 0},{timestamp(a, True)},{timestamp(b, True)},{style},,0,0,0,,{safe}'))
+            if kind == 'subtitles' and pagination is not None:
+                override += '\\q2'
+            for page_start, page_end, page in pages:
+                safe = page.replace('\\', '＼').replace('{', '｛').replace('}', '｝').replace('\n', '\\N')
+                if override:
+                    safe = '{' + override + '}' + safe
+                events.append((page_start, f'Dialogue: {1 if kind == "titles" else 0},{timestamp(page_start, True)},{timestamp(page_end, True)},{style},,0,0,0,,{safe}'))
     header = f'''[Script Info]
 ScriptType: v4.00+
 PlayResX: {w}
@@ -243,7 +264,8 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     srt_path.write_text('\n\n'.join(f'{i}\n{timestamp(a)} --> {timestamp(b)}\n{txt}'
                                   for i, (a, b, txt) in enumerate(sorted(srt), 1)) + '\n', encoding='utf-8')
     return {'subtitle_count': len(srt), 'title_count': len(events) - len(srt),
-            'timing_source': 'user-provided measured intervals; no speech alignment performed'}
+            'timing_source': ('user-provided cue boundaries; internal page timing estimated by text width; no speech alignment performed'
+                              if pagination is not None else 'user-provided measured intervals; no speech alignment performed')}
 
 
 def intervals(items, limit, name):

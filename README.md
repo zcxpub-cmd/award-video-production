@@ -8,6 +8,8 @@ Yingxu is an AI-assisted video creation workbench and agent toolkit for individu
 
 影序原名「颁奖视频制作」。仓库地址和插件安装命令继续沿用原有标识。
 
+候选 1.4.1 仅更新独立字幕工具：可选单行分页与标点边界保护；前端、提示词和模板保持不变。[功能更新说明](docs/functional-update-1.4.1.md)
+
 [开源版使用说明书](docs/使用说明书.md) · [逐项功能说明](docs/features.md) · [快速上手](skills/science-achievement-film/references/quickstart.md) · [能力与边界](skills/science-achievement-film/references/capabilities.md) · [验证范围](skills/science-achievement-film/references/verification.md)
 
 [下载 v1.4.0 开源工作台 ZIP](https://github.com/zcxpub-cmd/award-video-production/releases/download/v1.4.0/award-video-production-v1.4.0.zip) · [下载 v1.4.0 图文使用手册（PDF）](https://github.com/zcxpub-cmd/award-video-production/releases/download/v1.4.0/yingxu-v1.4.0-user-guide-zh-CN.pdf) · [安装与使用说明](docs/使用说明书.md)
